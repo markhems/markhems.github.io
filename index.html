@@ -13,9 +13,8 @@
       --muted: #c7bddf;
       --pink: #ff4fd8;
       --cyan: #39d5ff;
-      --violet: #9b5cff;
-      --panel: rgba(16, 10, 29, 0.72);
-      --panel-strong: rgba(22, 14, 40, 0.84);
+      --panel: rgba(16, 10, 29, 0.78);
+      --panel-strong: rgba(22, 14, 40, 0.86);
       --line: rgba(255, 255, 255, 0.10);
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
       --radius-xl: 30px;
@@ -134,9 +133,9 @@
 
     .hero {
       position: relative;
-      padding: 64px 0 72px;
+      padding: 48px 0 72px;
       overflow: hidden;
-      min-height: 820px;
+      min-height: 860px;
     }
 
     .hero-grid {
@@ -264,16 +263,13 @@
     .hero-copy {
       position: relative;
       z-index: 5;
-      padding-top: 0;
       margin-top: -8px;
     }
 
     .hero-right {
       position: relative;
-      min-height: 760px;
+      min-height: 780px;
       z-index: 5;
-      display: flex;
-      align-items: flex-start;
     }
 
     .hero-stage {
@@ -313,7 +309,6 @@
         rgba(255,79,216,0) 100%
       );
       box-shadow: var(--glow-pink), var(--glow-cyan);
-      opacity: 1;
       z-index: 3;
     }
 
@@ -383,9 +378,9 @@
     .hero-card-track {
       position: absolute;
       left: 50%;
-      top: 200px;
+      top: 120px;
       width: 100%;
-      height: 520px;
+      height: 560px;
       transform: translateX(-50%);
       pointer-events: none;
       z-index: 5;
@@ -431,27 +426,27 @@
         opacity: 1;
       }
       20% {
-        transform: translate(-50%, 18px) rotateX(52deg) scale(0.18);
+        transform: translate(-50%, 20px) rotateX(52deg) scale(0.18);
         opacity: 1;
       }
       40% {
-        transform: translate(-50%, 62px) rotateX(40deg) scale(0.38);
+        transform: translate(-50%, 68px) rotateX(40deg) scale(0.38);
         opacity: 1;
       }
       60% {
-        transform: translate(-50%, 142px) rotateX(24deg) scale(0.64);
+        transform: translate(-50%, 152px) rotateX(24deg) scale(0.64);
         opacity: 1;
       }
       78% {
-        transform: translate(-50%, 248px) rotateX(10deg) scale(0.88);
+        transform: translate(-50%, 264px) rotateX(10deg) scale(0.88);
         opacity: 1;
       }
       92% {
-        transform: translate(-50%, 338px) rotateX(2deg) scale(1.02);
+        transform: translate(-50%, 356px) rotateX(2deg) scale(1.02);
         opacity: 1;
       }
       97% {
-        transform: translate(-50%, 372px) rotateX(0deg) scale(1.08);
+        transform: translate(-50%, 388px) rotateX(0deg) scale(1.08);
         opacity: 0;
       }
       100% {
@@ -851,12 +846,12 @@
       }
 
       .hero-right {
-        min-height: 520px;
+        min-height: 540px;
       }
 
       .hero-card-track {
-        top: 160px;
-        height: 420px;
+        top: 120px;
+        height: 460px;
       }
 
       .travel-card {
@@ -905,7 +900,7 @@
       }
 
       .hero-card-track {
-        top: 140px;
+        top: 100px;
         height: 420px;
       }
 
@@ -975,7 +970,6 @@
 
         <div class="hero-right">
           <div class="hero-card-track">
-            <!-- To update later: edit href, title, summary, pills, and background-image below -->
             <a class="travel-card card-1" href="#work">
               <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');">
                 <div class="travel-card-lines">
