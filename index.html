@@ -270,7 +270,7 @@
 
     .hero-right {
       position: relative;
-      min-height: 560px;
+      min-height: 760px;
       z-index: 5;
       display: flex;
       align-items: flex-start;
@@ -383,9 +383,9 @@
     .hero-card-track {
       position: absolute;
       left: 50%;
-      top: 0;
+      top: 200px;
       width: 100%;
-      height: 560px;
+      height: 520px;
       transform: translateX(-50%);
       pointer-events: none;
       z-index: 5;
@@ -408,7 +408,7 @@
       transition:
         border-color var(--transition),
         box-shadow var(--transition);
-      animation: travelCard 12s linear infinite;
+      animation: travelCard 20s linear infinite;
     }
 
     .travel-card:hover {
@@ -422,38 +422,40 @@
     .travel-card.card-1 { animation-delay: 0s; }
     .travel-card.card-2 { animation-delay: -4s; }
     .travel-card.card-3 { animation-delay: -8s; }
+    .travel-card.card-4 { animation-delay: -12s; }
+    .travel-card.card-5 { animation-delay: -16s; }
 
     @keyframes travelCard {
       0% {
-        transform: translate(-50%, 0px) rotateX(58deg) scale(0.05);
+        transform: translate(-50%, 0px) rotateX(58deg) scale(0.06);
         opacity: 1;
       }
       20% {
-        transform: translate(-50%, 14px) rotateX(52deg) scale(0.16);
+        transform: translate(-50%, 18px) rotateX(52deg) scale(0.18);
         opacity: 1;
       }
       40% {
-        transform: translate(-50%, 52px) rotateX(40deg) scale(0.36);
+        transform: translate(-50%, 62px) rotateX(40deg) scale(0.38);
         opacity: 1;
       }
       60% {
-        transform: translate(-50%, 126px) rotateX(24deg) scale(0.62);
+        transform: translate(-50%, 142px) rotateX(24deg) scale(0.64);
         opacity: 1;
       }
       78% {
-        transform: translate(-50%, 232px) rotateX(10deg) scale(0.88);
+        transform: translate(-50%, 248px) rotateX(10deg) scale(0.88);
         opacity: 1;
       }
-      90% {
-        transform: translate(-50%, 328px) rotateX(2deg) scale(1.02);
+      92% {
+        transform: translate(-50%, 338px) rotateX(2deg) scale(1.02);
         opacity: 1;
       }
-      96% {
-        transform: translate(-50%, 364px) rotateX(0deg) scale(1.08);
+      97% {
+        transform: translate(-50%, 372px) rotateX(0deg) scale(1.08);
         opacity: 0;
       }
       100% {
-        transform: translate(-50%, 0px) rotateX(58deg) scale(0.05);
+        transform: translate(-50%, 0px) rotateX(58deg) scale(0.06);
         opacity: 0;
       }
     }
@@ -462,13 +464,24 @@
       position: relative;
       overflow: hidden;
       height: 180px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,79,216,0.14), transparent 20%),
-        linear-gradient(180deg, rgba(57,213,255,0.08), rgba(255,79,216,0.06)),
-        #12091f;
+      background-color: #12091f;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .travel-card-media::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(9,6,20,0.18), rgba(9,6,20,0.62)),
+        radial-gradient(circle at 20% 20%, rgba(255,79,216,0.18), transparent 22%),
+        radial-gradient(circle at 80% 24%, rgba(57,213,255,0.14), transparent 20%);
+      z-index: 1;
+    }
+
+    .travel-card-media::after {
       content: "";
       position: absolute;
       left: 50%;
@@ -481,6 +494,7 @@
         repeating-linear-gradient(to right, rgba(57,213,255,0.22) 0 2px, transparent 2px 46px),
         repeating-linear-gradient(to top, rgba(255,79,216,0.16) 0 2px, transparent 2px 46px);
       opacity: 0.66;
+      z-index: 2;
     }
 
     .travel-card-lines {
@@ -489,7 +503,7 @@
       display: grid;
       gap: 8px;
       align-content: start;
-      z-index: 2;
+      z-index: 3;
     }
 
     .travel-card-lines span {
@@ -513,7 +527,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      z-index: 2;
+      z-index: 3;
     }
 
     .travel-card-thumbs div {
@@ -837,7 +851,12 @@
       }
 
       .hero-right {
-        min-height: 500px;
+        min-height: 520px;
+      }
+
+      .hero-card-track {
+        top: 160px;
+        height: 420px;
       }
 
       .travel-card {
@@ -881,13 +900,18 @@
         opacity: 0.26;
       }
 
+      .hero-right {
+        min-height: 520px;
+      }
+
+      .hero-card-track {
+        top: 140px;
+        height: 420px;
+      }
+
       .travel-card {
         top: 0;
         width: min(390px, 88vw);
-      }
-
-      .hero-right {
-        min-height: 450px;
       }
 
       .travel-card-media {
@@ -951,8 +975,9 @@
 
         <div class="hero-right">
           <div class="hero-card-track">
+            <!-- To update later: edit href, title, summary, pills, and background-image below -->
             <a class="travel-card card-1" href="#work">
-              <div class="travel-card-media">
+              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');">
                 <div class="travel-card-lines">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
@@ -974,7 +999,7 @@
             </a>
 
             <a class="travel-card card-2" href="#work">
-              <div class="travel-card-media">
+              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1200&q=80');">
                 <div class="travel-card-lines">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
@@ -995,7 +1020,7 @@
             </a>
 
             <a class="travel-card card-3" href="#work">
-              <div class="travel-card-media">
+              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80');">
                 <div class="travel-card-lines">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
@@ -1010,6 +1035,48 @@
                 <div class="travel-card-meta">
                   <span class="travel-pill">Testing</span>
                   <span class="travel-pill">Experiments</span>
+                </div>
+                <div class="travel-cta">View case study →</div>
+              </div>
+            </a>
+
+            <a class="travel-card card-4" href="#work">
+              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80');">
+                <div class="travel-card-lines">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="travel-card-thumbs">
+                  <div></div><div></div><div></div>
+                </div>
+              </div>
+              <div class="travel-card-body">
+                <p class="project-type">Operational complexity</p>
+                <h3>Designing across user and agent workflows</h3>
+                <p>Aligning customer-facing journeys with agent tooling and service dependencies.</p>
+                <div class="travel-card-meta">
+                  <span class="travel-pill">Systems</span>
+                  <span class="travel-pill">Workflow</span>
+                </div>
+                <div class="travel-cta">View case study →</div>
+              </div>
+            </a>
+
+            <a class="travel-card card-5" href="#work">
+              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');">
+                <div class="travel-card-lines">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="travel-card-thumbs">
+                  <div></div><div></div><div></div>
+                </div>
+              </div>
+              <div class="travel-card-body">
+                <p class="project-type">Strategy & clarity</p>
+                <h3>Turning complexity into guided decision-making</h3>
+                <p>Designing flows that help users understand, choose, and progress with confidence.</p>
+                <div class="travel-card-meta">
+                  <span class="travel-pill">Strategy</span>
+                  <span class="travel-pill">UX</span>
                 </div>
                 <div class="travel-cta">View case study →</div>
               </div>
