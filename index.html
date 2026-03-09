@@ -6,169 +6,228 @@
   <title>Mark Hems — Lead UX Designer</title>
   <meta
     name="description"
-    content="Portfolio of Mark Hems, Lead UX Designer specialising in complex journeys, service design, research, and digital optimisation."
+    content="Mark Hems is a Lead UX Designer designing clearer journeys for complex products and services."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="noise"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
   <header class="site-header">
     <div class="container nav">
       <a href="#top" class="brand">Mark Hems</a>
+
       <nav class="nav-links">
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <a href="#contact" class="nav-cta magnetic">Let’s talk</a>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero">
+    <section class="hero section">
       <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="hero-role">Lead UX Designer</p>
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Lead UX Designer</p>
           <h1>Mark Hems</h1>
           <p class="hero-tagline">
             Designing clearer journeys for complex products and services.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#work">View work</a>
-            <a class="btn btn-secondary" href="#contact">Contact</a>
+            <a href="#work" class="btn btn-primary magnetic">
+              <span>View work</span>
+            </a>
+            <a href="#contact" class="btn btn-secondary magnetic">
+              <span>Contact</span>
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <span>Research-led</span>
+            <span>Service design</span>
+            <span>Journey optimisation</span>
           </div>
         </div>
 
-        <div class="hero-media">
-          <div class="hero-image-frame">
-            <img src="images/mark-hero.jpg" alt="Portrait of Mark Hems" />
+        <div class="hero-visual reveal">
+          <div class="portrait-wrap parallax" data-parallax="18">
+            <div class="portrait-card">
+              <img src="images/mark-portrait.jpg" alt="Portrait of Mark Hems" />
+              <div class="portrait-fallback">
+                <span>MH</span>
+              </div>
+            </div>
+
+            <div class="floating-badge badge-top-left parallax" data-parallax="28">
+              <span class="badge-dot"></span>
+              Available for senior UX roles
+            </div>
+
+            <div class="floating-badge badge-right parallax" data-parallax="22">
+              Complex B2B journeys
+            </div>
+
+            <div class="floating-badge badge-bottom-left parallax" data-parallax="16">
+              Research + strategy + delivery
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="work" class="section">
+    <section class="logo-marquee reveal">
+      <div class="marquee-track">
+        <span>Bionic</span>
+        <span>John Lewis</span>
+        <span>HMCTS</span>
+        <span>DWP</span>
+        <span>Hangar 13</span>
+        <span>Bionic</span>
+        <span>John Lewis</span>
+        <span>HMCTS</span>
+        <span>DWP</span>
+        <span>Hangar 13</span>
+      </div>
+    </section>
+
+    <section id="work" class="section work-section">
       <div class="container">
-        <div class="section-intro">
-          <p class="section-label">Selected work</p>
+        <div class="section-heading reveal">
+          <p class="eyebrow">Selected work</p>
           <h2>Featured case studies</h2>
         </div>
 
-        <div class="featured-grid">
-          <article class="project project-large">
-            <div class="project-image">
-              <img src="images/project-renewals.jpg" alt="Energy renewal journey redesign project" />
+        <div class="featured-project reveal project-card project-large">
+          <a href="#" class="project-link">
+            <div class="project-media">
+              <img src="images/project-1.jpg" alt="Energy renewal journey redesign" />
+              <div class="project-overlay"></div>
             </div>
-            <div class="project-copy">
+
+            <div class="project-content">
               <p class="project-type">Journey optimisation</p>
               <h3>Energy renewal journey redesign</h3>
               <p>
-                Redesigning a high-friction renewal journey to improve clarity,
-                confidence, and conversion.
+                Reframing a high-friction renewal experience to improve clarity,
+                confidence, and commercial performance.
               </p>
-              <a href="#" class="text-link">View case study</a>
+              <div class="project-footer">
+                <span class="project-chip">Lead UX</span>
+                <span class="project-chip">Research</span>
+                <span class="project-chip">Service design</span>
+                <span class="project-arrow">↗</span>
+              </div>
             </div>
+          </a>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card reveal">
+            <a href="#" class="project-link">
+              <div class="project-media">
+                <img src="images/project-2.jpg" alt="Insurance journey deconstruction" />
+                <div class="project-overlay"></div>
+              </div>
+              <div class="project-content">
+                <p class="project-type">Service design</p>
+                <h3>Insurance journey deconstruction</h3>
+                <p>
+                  Simplifying a logic-heavy journey through clearer IA, conditional flows, and page structure.
+                </p>
+                <div class="project-footer">
+                  <span class="project-chip">IA</span>
+                  <span class="project-chip">Mapping</span>
+                  <span class="project-arrow">↗</span>
+                </div>
+              </div>
+            </a>
           </article>
 
-          <article class="project">
-            <div class="project-image">
-              <img src="images/project-insurance.jpg" alt="Insurance journey deconstruction project" />
-            </div>
-            <div class="project-copy">
-              <p class="project-type">Service design</p>
-              <h3>Insurance journey deconstruction</h3>
-              <p>
-                Simplifying a logic-heavy insurance flow through IA and service mapping.
-              </p>
-              <a href="#" class="text-link">View case study</a>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-image">
-              <img src="images/project-research.jpg" alt="Research and experimentation project" />
-            </div>
-            <div class="project-copy">
-              <p class="project-type">Research & experimentation</p>
-              <h3>Evidence-led UX optimisation</h3>
-              <p>
-                Using testing, behavioural evidence, and hypotheses to guide design decisions.
-              </p>
-              <a href="#" class="text-link">View case study</a>
-            </div>
+          <article class="project-card reveal">
+            <a href="#" class="project-link">
+              <div class="project-media">
+                <img src="images/project-3.jpg" alt="Evidence-led UX optimisation" />
+                <div class="project-overlay"></div>
+              </div>
+              <div class="project-content">
+                <p class="project-type">Research & experimentation</p>
+                <h3>Evidence-led UX optimisation</h3>
+                <p>
+                  Using testing, behavioural evidence, and hypothesis-led design to identify high-value improvements.
+                </p>
+                <div class="project-footer">
+                  <span class="project-chip">Testing</span>
+                  <span class="project-chip">Experiments</span>
+                  <span class="project-arrow">↗</span>
+                </div>
+              </div>
+            </a>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section section-soft">
+    <section id="about" class="section about-section">
       <div class="container about-grid">
-        <div class="about-image-frame">
-          <img src="images/mark-about.jpg" alt="Mark Hems profile image" />
-        </div>
-
-        <div class="about-copy">
-          <p class="section-label">About</p>
+        <div class="about-copy reveal">
+          <p class="eyebrow">About</p>
           <h2>I design for clarity, confidence, and momentum.</h2>
           <p>
-            I’m a Lead UX Designer focused on complex end-to-end services,
-            research-led decision making, and improving journeys that are difficult
-            for users and commercially important for businesses.
+            I’m a Lead UX Designer with experience across complex digital services,
+            research-heavy projects, service design, experimentation, and end-to-end
+            journey improvement.
           </p>
           <p>
-            My work spans UX design, service design, usability testing,
-            information architecture, experimentation, and journey optimisation.
+            My strongest work tends to sit where user needs, operational complexity,
+            and commercial goals collide.
           </p>
+        </div>
 
-          <div class="tag-list">
-            <span>User research</span>
-            <span>Service design</span>
-            <span>Journey mapping</span>
-            <span>Information architecture</span>
-            <span>Usability testing</span>
-            <span>Experimentation</span>
+        <div class="about-panel reveal">
+          <div class="about-stat">
+            <span class="about-stat-label">Focus</span>
+            <strong>Complex journeys</strong>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-label">Approach</span>
+            <strong>Evidence-led design</strong>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-label">Strength</span>
+            <strong>Turning ambiguity into flow</strong>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-intro">
-          <p class="section-label">Experience</p>
-          <h2>Recent organisations</h2>
-        </div>
-
-        <div class="logo-strip">
-          <div class="logo-pill">Bionic</div>
-          <div class="logo-pill">John Lewis</div>
-          <div class="logo-pill">HMCTS</div>
-          <div class="logo-pill">DWP</div>
-          <div class="logo-pill">Hangar 13</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section section-soft">
-      <div class="container contact-block">
-        <p class="section-label">Contact</p>
+    <section id="contact" class="section contact-section">
+      <div class="container contact-block reveal">
+        <p class="eyebrow">Contact</p>
         <h2>Let’s talk.</h2>
-        <p class="contact-text">
-          For roles, freelance opportunities, or design conversations.
+        <p>
+          For senior UX roles, consulting work, or design conversations.
         </p>
 
         <div class="contact-links">
-          <a href="mailto:your@email.com">your@email.com</a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://github.com/markhems" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="mailto:your@email.com" class="contact-link magnetic">your@email.com</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="contact-link magnetic">LinkedIn</a>
+          <a href="https://github.com/markhems" target="_blank" rel="noopener noreferrer" class="contact-link magnetic">GitHub</a>
         </div>
       </div>
     </section>
   </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
