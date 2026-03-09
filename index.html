@@ -6,7 +6,7 @@
   <title>Mark Hems — Lead UX Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       --text: #f5f1ff;
@@ -14,8 +14,8 @@
       --pink: #ff4fd8;
       --cyan: #39d5ff;
       --violet: #9b5cff;
-      --panel: rgba(16, 10, 29, 0.72);
-      --panel-strong: rgba(22, 14, 40, 0.82);
+      --panel: rgba(16, 10, 29, 0.70);
+      --panel-strong: rgba(22, 14, 40, 0.84);
       --line: rgba(255, 255, 255, 0.10);
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
       --radius-xl: 30px;
@@ -106,9 +106,9 @@
     }
 
     .brand {
-      font-family: "Oxanium", sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.03em;
+      font-family: "Chakra Petch", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       text-shadow: var(--glow-cyan);
     }
 
@@ -136,16 +136,16 @@
       position: relative;
       padding: 88px 0 72px;
       overflow: hidden;
-      min-height: 760px;
+      min-height: 780px;
     }
 
     .hero-grid {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       display: grid;
-      grid-template-columns: minmax(0, 560px) 1fr;
-      gap: 40px;
-      align-items: start;
+      grid-template-columns: minmax(0, 520px) 1fr;
+      gap: 48px;
+      align-items: center;
     }
 
     .eyebrow,
@@ -154,40 +154,40 @@
     .stat-label {
       margin: 0 0 12px;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       color: var(--cyan);
       text-shadow: var(--glow-cyan);
-      font-family: "Oxanium", sans-serif;
+      font-family: "Chakra Petch", sans-serif;
     }
 
     h1, h2, h3 {
-      font-family: "Oxanium", sans-serif;
+      font-family: "Chakra Petch", sans-serif;
     }
 
     h1 {
       margin: 0;
       font-size: clamp(64px, 11vw, 132px);
       line-height: 0.88;
-      letter-spacing: -0.07em;
+      letter-spacing: -0.05em;
       text-shadow:
         0 0 18px rgba(255, 79, 216, 0.16),
         0 0 36px rgba(57, 213, 255, 0.10);
     }
 
     .hero-tagline {
-      margin: 18px 0 0;
-      max-width: 22ch;
-      font-size: clamp(20px, 2vw, 26px);
-      line-height: 1.24;
+      margin: 16px 0 0;
+      max-width: 26ch;
+      font-size: clamp(16px, 1.35vw, 20px);
+      line-height: 1.35;
       color: #e6def8;
     }
 
     .hero-actions {
       display: flex;
       gap: 14px;
-      margin-top: 30px;
+      margin-top: 28px;
       flex-wrap: wrap;
     }
 
@@ -198,7 +198,7 @@
       min-height: 52px;
       padding: 0 20px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 700;
       border: 1px solid rgba(255,255,255,0.10);
       transition:
         transform var(--transition),
@@ -206,7 +206,7 @@
         border-color var(--transition),
         background var(--transition);
       backdrop-filter: blur(10px);
-      font-family: "Oxanium", sans-serif;
+      font-family: "Chakra Petch", sans-serif;
       letter-spacing: 0.01em;
     }
 
@@ -248,7 +248,7 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 24px;
+      margin-top: 22px;
     }
 
     .hero-meta span {
@@ -263,9 +263,17 @@
 
     .hero-copy {
       position: relative;
-      z-index: 3;
-      padding-top: 10px;
+      z-index: 4;
+      padding-top: 6px;
     }
+
+    .hero-right {
+      position: relative;
+      min-height: 520px;
+      z-index: 4;
+    }
+
+    /* Background stage */
 
     .hero-stage {
       position: absolute;
@@ -293,57 +301,65 @@
       left: 50%;
       top: 31%;
       transform: translateX(-50%);
-      width: min(74vw, 980px);
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--pink), var(--cyan), transparent);
+      width: min(76vw, 1040px);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,79,216,0.9), rgba(57,213,255,0.92), transparent);
       box-shadow: var(--glow-pink), var(--glow-cyan);
       opacity: 1;
+      z-index: 2;
     }
 
-    .perspective-grid {
+    .perspective-grid-wrap {
       position: absolute;
       left: 50%;
       top: 31%;
-      width: 180vw;
-      max-width: 2200px;
+      width: 190vw;
+      max-width: 2400px;
       height: 980px;
+      transform: translateX(-50%) perspective(1500px) rotateX(79deg);
       transform-origin: center top;
-      transform: translateX(-50%) perspective(1400px) rotateX(78deg);
-      opacity: 1;
+      z-index: 1;
+      opacity: 0.42;
+      filter: blur(0.6px);
     }
 
-    .perspective-grid::before {
-      content: "";
+    .grid-vertical,
+    .grid-horizontal {
       position: absolute;
       inset: 0;
+      will-change: background-position;
+    }
+
+    .grid-vertical {
       background:
         repeating-linear-gradient(
           to right,
-          rgba(57,213,255,0.00) 0px,
-          rgba(57,213,255,0.00) 78px,
-          rgba(57,213,255,0.95) 79px,
-          rgba(57,213,255,0.95) 81px,
-          rgba(57,213,255,0.00) 82px,
-          rgba(57,213,255,0.00) 160px
+          transparent 0px 88px,
+          rgba(57,213,255,0.82) 88px 90px,
+          transparent 90px 176px
         );
-      filter: drop-shadow(0 0 6px rgba(57,213,255,0.7));
+      filter: drop-shadow(0 0 4px rgba(57,213,255,0.45));
     }
 
-    .perspective-grid::after {
-      content: "";
-      position: absolute;
-      inset: 0;
+    .grid-horizontal {
       background:
         repeating-linear-gradient(
           to bottom,
-          rgba(255,79,216,0.00) 0px,
-          rgba(255,79,216,0.00) 52px,
-          rgba(255,79,216,0.78) 53px,
-          rgba(255,79,216,0.78) 55px,
-          rgba(255,79,216,0.00) 56px,
-          rgba(255,79,216,0.00) 108px
+          transparent 0px 46px,
+          rgba(255,79,216,0.56) 46px 48px,
+          transparent 48px 94px
         );
-      filter: drop-shadow(0 0 6px rgba(255,79,216,0.45));
+      filter: drop-shadow(0 0 4px rgba(255,79,216,0.28));
+      animation: forwardMotion 4.5s linear infinite;
+    }
+
+    @keyframes forwardMotion {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 0 94px;
+      }
     }
 
     .grid-fade {
@@ -352,12 +368,177 @@
       background:
         linear-gradient(
           to bottom,
-          rgba(9,3,17,0.04) 0%,
-          rgba(9,3,17,0.00) 24%,
-          rgba(9,3,17,0.08) 70%,
+          rgba(9,3,17,0.02) 0%,
+          rgba(9,3,17,0.00) 26%,
+          rgba(9,3,17,0.10) 72%,
           rgba(4,2,8,0.58) 100%
         );
+      z-index: 2;
     }
+
+    /* Hero case study carousel */
+
+    .hero-cards {
+      position: absolute;
+      right: 10px;
+      top: 18px;
+      width: min(430px, 100%);
+      height: 500px;
+      pointer-events: none;
+    }
+
+    .hero-card-link {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-rows: 220px 1fr;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(18, 12, 34, 0.72);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(12px) scale(0.985);
+      animation: heroCardCycle 15s infinite;
+      pointer-events: auto;
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .hero-card-link:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(57,213,255,0.34);
+      box-shadow:
+        0 24px 70px rgba(0,0,0,0.42),
+        0 0 18px rgba(57,213,255,0.28),
+        0 0 28px rgba(255,79,216,0.14);
+    }
+
+    .hero-card-link.card-1 { animation-delay: 0s; }
+    .hero-card-link.card-2 { animation-delay: 5s; }
+    .hero-card-link.card-3 { animation-delay: 10s; }
+
+    @keyframes heroCardCycle {
+      0%   { opacity: 0; transform: translateY(16px) scale(0.985); }
+      5%   { opacity: 1; transform: translateY(0) scale(1); }
+      28%  { opacity: 1; transform: translateY(0) scale(1); }
+      33%  { opacity: 0; transform: translateY(-10px) scale(1.01); }
+      100% { opacity: 0; transform: translateY(-10px) scale(1.01); }
+    }
+
+    .hero-card-media {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,79,216,0.14), transparent 20%),
+        linear-gradient(180deg, rgba(57,213,255,0.08), rgba(255,79,216,0.06)),
+        #12091f;
+    }
+
+    .hero-card-media::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -8%;
+      transform: translateX(-50%) perspective(800px) rotateX(76deg);
+      width: 145%;
+      height: 72%;
+      background:
+        linear-gradient(to bottom, rgba(255,79,216,0.10), rgba(57,213,255,0.05) 24%, transparent 60%),
+        repeating-linear-gradient(to right, rgba(57,213,255,0.22) 0 2px, transparent 2px 46px),
+        repeating-linear-gradient(to top, rgba(255,79,216,0.16) 0 2px, transparent 2px 46px);
+      opacity: 0.66;
+    }
+
+    .hero-card-lines {
+      position: absolute;
+      inset: 20px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      z-index: 2;
+    }
+
+    .hero-card-lines span {
+      display: block;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+    }
+
+    .hero-card-lines span:nth-child(1) { width: 26%; background: linear-gradient(90deg, var(--pink), var(--cyan)); }
+    .hero-card-lines span:nth-child(2) { width: 58%; height: 18px; background: rgba(255,255,255,0.18); }
+    .hero-card-lines span:nth-child(3) { width: 100%; }
+    .hero-card-lines span:nth-child(4) { width: 82%; }
+    .hero-card-lines span:nth-child(5) { width: 64%; }
+
+    .hero-card-thumbs {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .hero-card-thumbs div {
+      aspect-ratio: 1.15 / 0.82;
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg, rgba(57,213,255,0.12), rgba(255,79,216,0.08)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-card-body {
+      padding: 22px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+    }
+
+    .hero-card-body h3 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-card-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .hero-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .hero-pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #e2daf6;
+      font-size: 13px;
+    }
+
+    .hero-card-cta {
+      margin-top: 2px;
+      color: #fff;
+      font-family: "Chakra Petch", sans-serif;
+      text-shadow: var(--glow-cyan);
+    }
+
+    /* Rest of page */
 
     .section {
       position: relative;
@@ -569,7 +750,7 @@
       font-size: 22px;
       letter-spacing: -0.02em;
       margin-top: 8px;
-      font-family: "Oxanium", sans-serif;
+      font-family: "Chakra Petch", sans-serif;
     }
 
     .contact-card {
@@ -596,13 +777,13 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
-      font-weight: 800;
+      font-weight: 700;
       transition:
         transform var(--transition),
         border-color var(--transition),
         box-shadow var(--transition);
       backdrop-filter: blur(10px);
-      font-family: "Oxanium", sans-serif;
+      font-family: "Chakra Petch", sans-serif;
     }
 
     .contact-links a:hover {
@@ -622,11 +803,21 @@
       }
 
       .hero {
-        min-height: 680px;
+        min-height: 980px;
       }
 
-      .hero-stage {
-        top: 160px;
+      .hero-right {
+        min-height: 420px;
+      }
+
+      .hero-cards {
+        position: relative;
+        right: auto;
+        top: auto;
+        width: 100%;
+        max-width: 480px;
+        height: 460px;
+        margin-left: auto;
       }
     }
 
@@ -642,7 +833,7 @@
 
       .hero {
         padding-top: 46px;
-        min-height: 620px;
+        min-height: 980px;
       }
 
       .hero-actions {
@@ -651,21 +842,39 @@
       }
 
       .hero-grid {
-        gap: 22px;
+        gap: 28px;
       }
 
       .hero-horizon {
-        top: 38%;
+        top: 35%;
         width: 88vw;
       }
 
-      .perspective-grid {
-        top: 38%;
-        width: 240vw;
+      .perspective-grid-wrap {
+        top: 35%;
+        width: 250vw;
         height: 760px;
-        transform: translateX(-50%) perspective(1100px) rotateX(79deg);
+        transform: translateX(-50%) perspective(1100px) rotateX(80deg);
+        opacity: 0.34;
       }
 
+      .hero-right {
+        min-height: 420px;
+      }
+
+      .hero-cards {
+        height: 420px;
+      }
+
+      .hero-card-link {
+        grid-template-rows: 180px 1fr;
+      }
+
+      .hero-card-body h3 {
+        font-size: 24px;
+      }
+
+      .hero-card-thumbs,
       .project-mini-cards {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -689,7 +898,10 @@
       <div class="hero-stage" aria-hidden="true">
         <div class="hero-glow"></div>
         <div class="hero-horizon"></div>
-        <div class="perspective-grid"></div>
+        <div class="perspective-grid-wrap">
+          <div class="grid-vertical"></div>
+          <div class="grid-horizontal"></div>
+        </div>
         <div class="grid-fade"></div>
       </div>
 
@@ -713,7 +925,73 @@
           </div>
         </div>
 
-        <div></div>
+        <div class="hero-right">
+          <div class="hero-cards">
+            <a class="hero-card-link card-1" href="#work">
+              <div class="hero-card-media">
+                <div class="hero-card-lines">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="hero-card-thumbs">
+                  <div></div><div></div><div></div>
+                </div>
+              </div>
+              <div class="hero-card-body">
+                <p class="project-type">Journey optimisation</p>
+                <h3>Energy renewal journey redesign</h3>
+                <p>Reducing friction and improving clarity in a commercially sensitive renewal flow.</p>
+                <div class="hero-card-meta">
+                  <span class="hero-pill">Lead UX</span>
+                  <span class="hero-pill">Research</span>
+                  <span class="hero-pill">Service design</span>
+                </div>
+                <div class="hero-card-cta">View case study →</div>
+              </div>
+            </a>
+
+            <a class="hero-card-link card-2" href="#work">
+              <div class="hero-card-media">
+                <div class="hero-card-lines">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="hero-card-thumbs">
+                  <div></div><div></div><div></div>
+                </div>
+              </div>
+              <div class="hero-card-body">
+                <p class="project-type">Service design</p>
+                <h3>Insurance journey deconstruction</h3>
+                <p>Untangling complex logic and information architecture into a clearer scalable structure.</p>
+                <div class="hero-card-meta">
+                  <span class="hero-pill">IA</span>
+                  <span class="hero-pill">Mapping</span>
+                </div>
+                <div class="hero-card-cta">View case study →</div>
+              </div>
+            </a>
+
+            <a class="hero-card-link card-3" href="#work">
+              <div class="hero-card-media">
+                <div class="hero-card-lines">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="hero-card-thumbs">
+                  <div></div><div></div><div></div>
+                </div>
+              </div>
+              <div class="hero-card-body">
+                <p class="project-type">Research & experimentation</p>
+                <h3>Evidence-led UX optimisation</h3>
+                <p>Using testing and behavioural evidence to drive measurable product improvements.</p>
+                <div class="hero-card-meta">
+                  <span class="hero-pill">Testing</span>
+                  <span class="hero-pill">Experiments</span>
+                </div>
+                <div class="hero-card-cta">View case study →</div>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
