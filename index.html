@@ -8,27 +8,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-      a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  a,
-  button,
-  .btn {
-    cursor: pointer;
-  }
     :root {
-      --bg-top: #090311;
-      --bg-bottom: #040208;
-      --panel: rgba(13, 10, 24, 0.68);
-      --panel-strong: rgba(20, 14, 36, 0.82);
-      --line: rgba(255, 255, 255, 0.10);
       --text: #f5f1ff;
       --muted: #c7bddf;
       --pink: #ff4fd8;
       --cyan: #39d5ff;
       --violet: #9b5cff;
+      --panel: rgba(16, 10, 29, 0.72);
+      --panel-strong: rgba(22, 14, 40, 0.82);
+      --line: rgba(255, 255, 255, 0.10);
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --max-width: 1220px;
+      --transition: 260ms cubic-bezier(.2,.8,.2,1);
       --glow-pink:
         0 0 10px rgba(255, 79, 216, 0.8),
         0 0 24px rgba(255, 79, 216, 0.55),
@@ -41,12 +34,6 @@
         0 0 12px rgba(255, 79, 216, 0.7),
         0 0 22px rgba(57, 213, 255, 0.65),
         0 0 44px rgba(155, 92, 255, 0.3);
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --max-width: 1220px;
-      --transition: 260ms cubic-bezier(.2,.8,.2,1);
     }
 
     * {
@@ -62,10 +49,10 @@
       font-family: "Inter", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 50% 16%, rgba(255, 79, 216, 0.35), transparent 18%),
-        radial-gradient(circle at 58% 20%, rgba(57, 213, 255, 0.20), transparent 16%),
+        radial-gradient(circle at 50% 14%, rgba(255, 79, 216, 0.34), transparent 16%),
+        radial-gradient(circle at 58% 18%, rgba(57, 213, 255, 0.20), transparent 14%),
         radial-gradient(circle at 18% 12%, rgba(155, 92, 255, 0.16), transparent 18%),
-        linear-gradient(180deg, #12051f 0%, #090311 38%, #040208 100%);
+        linear-gradient(180deg, #12051f 0%, #090311 42%, #040208 100%);
       line-height: 1.5;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -77,16 +64,21 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 50% 10%, rgba(255,255,255,0.10), transparent 10%),
-        radial-gradient(circle at 70% 22%, rgba(57,213,255,0.10), transparent 12%),
-        radial-gradient(circle at 35% 24%, rgba(255,79,216,0.08), transparent 12%);
-      opacity: 0.9;
+        radial-gradient(circle at 50% 10%, rgba(255,255,255,0.08), transparent 10%),
+        radial-gradient(circle at 70% 22%, rgba(57,213,255,0.08), transparent 12%),
+        radial-gradient(circle at 35% 24%, rgba(255,79,216,0.06), transparent 12%);
       z-index: 0;
     }
 
     a {
       color: inherit;
       text-decoration: none;
+      cursor: pointer;
+    }
+
+    button,
+    .btn {
+      cursor: pointer;
     }
 
     .container {
@@ -142,69 +134,24 @@
 
     .hero {
       position: relative;
-      padding: 88px 0 56px;
+      padding: 88px 0 72px;
       overflow: hidden;
-    }
-
-    /* Main perspective neon grid */
-    .hero::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -12vw;
-      width: 160vw;
-      height: 70vw;
-      background:
-        linear-gradient(to bottom, rgba(255,79,216,0.18), rgba(57,213,255,0.06) 28%, rgba(0,0,0,0) 55%),
-        repeating-linear-gradient(
-          to right,
-          rgba(57,213,255,0.28) 0 2px,
-          transparent 2px 70px
-        ),
-        repeating-linear-gradient(
-          to top,
-          rgba(255,79,216,0.22) 0 2px,
-          transparent 2px 70px
-        );
-      transform-origin: center bottom;
-      transform: translateX(-50%) perspective(900px) rotateX(76deg);
-      opacity: 0.78;
-      filter: drop-shadow(0 0 18px rgba(57,213,255,0.25));
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Isometric pattern overlay behind hero content */
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.26;
-      background-image:
-        linear-gradient(30deg, rgba(57,213,255,0.28) 2px, transparent 2px),
-        linear-gradient(150deg, rgba(255,79,216,0.24) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(155,92,255,0.18) 2px, transparent 2px);
-      background-size: 72px 42px, 72px 42px, 72px 42px;
-      background-position: 0 0, 0 0, 0 21px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.12));
+      min-height: 760px;
     }
 
     .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 0.95fr;
-      gap: 42px;
-      align-items: center;
       position: relative;
       z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 560px) 1fr;
+      gap: 40px;
+      align-items: start;
     }
 
     .eyebrow,
     .section-label,
     .project-type,
-    .stat-label,
-    .mini-label {
+    .stat-label {
       margin: 0 0 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -312,272 +259,85 @@
       color: var(--muted);
       font-size: 14px;
       backdrop-filter: blur(10px);
-      transition:
-        border-color var(--transition),
-        box-shadow var(--transition),
-        transform var(--transition);
     }
 
-    .hero-meta span:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,79,216,0.34);
-      box-shadow: var(--glow-pink);
-    }
-
-    .hero-visual {
+    .hero-copy {
       position: relative;
-      min-height: 560px;
+      z-index: 3;
+      padding-top: 10px;
     }
 
-    .vr-space {
-      position: relative;
-      min-height: 560px;
-      border-radius: 36px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background:
-        radial-gradient(circle at 50% 8%, rgba(255,79,216,0.24), transparent 18%),
-        radial-gradient(circle at 60% 22%, rgba(57,213,255,0.14), transparent 16%),
-        linear-gradient(180deg, rgba(19,10,34,0.92) 0%, rgba(10,5,18,0.90) 100%);
-      box-shadow: var(--shadow);
+    .hero-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
       overflow: hidden;
-      backdrop-filter: blur(10px);
     }
 
-    .vr-space::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(255,255,255,0.06), transparent 28%),
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.10), transparent 12%);
-      pointer-events: none;
-    }
-
-    /* Isometric mesh inside virtual space */
-    .vr-space::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.22;
-      background-image:
-        linear-gradient(30deg, rgba(57,213,255,0.32) 2px, transparent 2px),
-        linear-gradient(150deg, rgba(255,79,216,0.26) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(155,92,255,0.18) 2px, transparent 2px);
-      background-size: 58px 34px, 58px 34px, 58px 34px;
-      background-position: 0 0, 0 0, 0 17px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.72), rgba(0,0,0,0.18));
-    }
-
-    .vr-horizon {
+    .hero-glow {
       position: absolute;
       left: 50%;
-      top: 26%;
-      width: 62%;
-      height: 2px;
+      top: 8%;
       transform: translateX(-50%);
+      width: 620px;
+      height: 220px;
+      background:
+        radial-gradient(circle, rgba(255,79,216,0.28) 0%, rgba(57,213,255,0.16) 38%, rgba(0,0,0,0) 72%);
+      filter: blur(28px);
+      opacity: 0.95;
+    }
+
+    .hero-horizon {
+      position: absolute;
+      left: 50%;
+      top: 30%;
+      transform: translateX(-50%);
+      width: min(72vw, 920px);
+      height: 2px;
       background: linear-gradient(90deg, transparent, var(--pink), var(--cyan), transparent);
       box-shadow: var(--glow-pink), var(--glow-cyan);
       opacity: 0.95;
     }
 
-    .vr-beam {
+    .perspective-grid {
       position: absolute;
       left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      width: 24%;
-      height: 46%;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.20), rgba(255,79,216,0.14), transparent 70%);
-      clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
-      filter: blur(4px);
-      opacity: 0.95;
-    }
-
-    .space-card {
-      position: absolute;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(18, 12, 34, 0.72);
-      box-shadow:
-        0 14px 40px rgba(0,0,0,0.26),
-        inset 0 1px 0 rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
-      overflow: hidden;
-      transition:
-        transform var(--transition),
-        border-color var(--transition),
-        box-shadow var(--transition);
-    }
-
-    .space-card:hover {
-      transform: translateY(-4px) scale(1.015);
-      border-color: rgba(57,213,255,0.34);
-      box-shadow:
-        0 18px 48px rgba(0,0,0,0.30),
-        0 0 18px rgba(57,213,255,0.34),
-        0 0 28px rgba(255,79,216,0.18);
-    }
-
-    .card-a {
-      left: 42px;
-      top: 92px;
-      width: 360px;
-      height: 286px;
-      transform: rotate(-4deg);
-    }
-
-    .card-b {
-      right: 34px;
-      top: 64px;
-      width: 210px;
-      height: 150px;
-      transform: rotate(5deg);
-    }
-
-    .card-c {
-      right: 62px;
-      bottom: 84px;
-      width: 250px;
-      height: 170px;
-      transform: rotate(-6deg);
-    }
-
-    .card-bar {
-      display: flex;
-      gap: 6px;
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(90deg, rgba(255,79,216,0.10), rgba(57,213,255,0.08));
-    }
-
-    .card-bar span {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.16);
-    }
-
-    .card-body {
-      padding: 16px;
-    }
-
-    .line {
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-      margin-bottom: 10px;
-    }
-
-    .line-accent {
-      width: 94px;
-      background: linear-gradient(90deg, var(--pink), var(--cyan));
-      box-shadow: var(--glow-cyan);
-      margin-bottom: 16px;
-    }
-
-    .line-title {
-      height: 18px;
-      width: 74%;
-      background: rgba(255,255,255,0.18);
-      margin-bottom: 14px;
-    }
-
-    .line-1 { width: 100%; }
-    .line-2 { width: 82%; }
-    .line-3 { width: 64%; }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    .mini-grid div {
-      aspect-ratio: 1.15 / 0.8;
-      border-radius: 16px;
+      bottom: -10vw;
+      transform: translateX(-50%) perspective(1100px) rotateX(78deg);
+      transform-origin: center bottom;
+      width: 180vw;
+      height: 72vw;
+      max-height: 900px;
       background:
-        linear-gradient(180deg, rgba(57,213,255,0.14), rgba(255,79,216,0.08)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+        linear-gradient(to bottom, rgba(255,79,216,0.18), rgba(57,213,255,0.08) 22%, rgba(0,0,0,0) 58%),
+        repeating-linear-gradient(
+          to right,
+          rgba(57,213,255,0.24) 0 2px,
+          transparent 2px 86px
+        ),
+        repeating-linear-gradient(
+          to top,
+          rgba(255,79,216,0.20) 0 2px,
+          transparent 2px 86px
+        );
+      opacity: 0.92;
+      filter:
+        drop-shadow(0 0 18px rgba(57,213,255,0.24))
+        drop-shadow(0 0 18px rgba(255,79,216,0.16));
     }
 
-    .mini-chart {
-      padding: 16px;
-    }
-
-    .chart-head {
-      width: 70%;
-      height: 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.14);
-      margin-bottom: 16px;
-    }
-
-    .bars {
-      display: flex;
-      align-items: end;
-      gap: 10px;
-      height: 64px;
-    }
-
-    .bars span {
-      display: block;
-      width: 24px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, var(--cyan), var(--pink));
-      box-shadow: var(--glow-pink);
-    }
-
-    .bars span:nth-child(1) { height: 30px; }
-    .bars span:nth-child(2) { height: 52px; }
-    .bars span:nth-child(3) { height: 44px; }
-    .bars span:nth-child(4) { height: 62px; }
-
-    .token-stack {
-      padding: 16px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .token-stack div {
-      height: 40px;
-      border-radius: 14px;
-      background:
-        linear-gradient(90deg, rgba(255,79,216,0.12), rgba(57,213,255,0.10)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero-badge {
+    .grid-fade {
       position: absolute;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(18, 12, 34, 0.72);
-      box-shadow:
-        0 14px 32px rgba(0,0,0,0.26),
-        inset 0 1px 0 rgba(255,255,255,0.06);
-      color: #f1eaff;
-      font-size: 14px;
-      white-space: nowrap;
-      backdrop-filter: blur(12px);
-      transition:
-        transform var(--transition),
-        border-color var(--transition),
-        box-shadow var(--transition);
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(9,3,17,0.10) 0%,
+        rgba(9,3,17,0.02) 30%,
+        rgba(9,3,17,0.12) 70%,
+        rgba(4,2,8,0.70) 100%
+      );
     }
-
-    .hero-badge:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,79,216,0.34);
-      box-shadow: var(--glow-mixed);
-    }
-
-    .badge-1 { top: 22px; left: 0; }
-    .badge-2 { top: 224px; right: -8px; }
-    .badge-3 { left: 18px; bottom: 20px; }
 
     .section {
       position: relative;
@@ -586,8 +346,7 @@
     }
 
     .section-soft {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border-top: 1px solid rgba(255,255,255,0.05);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
@@ -743,16 +502,6 @@
       color: #e2daf6;
       font-size: 14px;
       backdrop-filter: blur(10px);
-      transition:
-        border-color var(--transition),
-        box-shadow var(--transition),
-        transform var(--transition);
-    }
-
-    .chip:hover {
-      transform: translateY(-2px);
-      border-color: rgba(57,213,255,0.34);
-      box-shadow: var(--glow-cyan);
     }
 
     .about-grid {
@@ -852,30 +601,12 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-visual {
-        min-height: 480px;
+      .hero {
+        min-height: 680px;
       }
 
-      .vr-space {
-        min-height: 480px;
-      }
-
-      .card-a {
-        left: 22px;
-        width: 300px;
-        height: 246px;
-      }
-
-      .card-b {
-        right: 22px;
-        width: 180px;
-        height: 130px;
-      }
-
-      .card-c {
-        right: 28px;
-        width: 210px;
-        height: 150px;
+      .hero-stage {
+        top: 160px;
       }
     }
 
@@ -891,6 +622,7 @@
 
       .hero {
         padding-top: 46px;
+        min-height: 620px;
       }
 
       .hero-actions {
@@ -898,40 +630,19 @@
         align-items: stretch;
       }
 
-      .hero-visual {
-        min-height: auto;
+      .hero-grid {
+        gap: 22px;
       }
 
-      .vr-space {
-        min-height: 360px;
+      .hero-horizon {
+        top: 40%;
+        width: 88vw;
       }
 
-      .card-a {
-        left: 14px;
-        top: 74px;
-        width: 220px;
-        height: 190px;
-      }
-
-      .card-b {
-        right: 14px;
-        top: 26px;
-        width: 126px;
-        height: 100px;
-      }
-
-      .card-c {
-        right: 16px;
-        bottom: 34px;
-        width: 150px;
-        height: 112px;
-      }
-
-      .hero-badge {
-        position: static;
-        display: inline-flex;
-        margin-top: 12px;
-        white-space: normal;
+      .perspective-grid {
+        width: 220vw;
+        height: 96vw;
+        bottom: -8vw;
       }
 
       .project-mini-cards {
@@ -954,8 +665,15 @@
 
   <main>
     <section class="hero">
+      <div class="hero-stage" aria-hidden="true">
+        <div class="hero-glow"></div>
+        <div class="hero-horizon"></div>
+        <div class="perspective-grid"></div>
+        <div class="grid-fade"></div>
+      </div>
+
       <div class="container hero-grid">
-        <div>
+        <div class="hero-copy">
           <p class="eyebrow">Lead UX Designer</p>
           <h1>Mark Hems</h1>
           <p class="hero-tagline">
@@ -974,48 +692,7 @@
           </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="vr-space">
-            <div class="vr-beam"></div>
-            <div class="vr-horizon"></div>
-
-            <div class="hero-badge badge-1">Available for senior UX roles</div>
-            <div class="hero-badge badge-2">Complex B2B journeys</div>
-            <div class="hero-badge badge-3">Research + strategy + delivery</div>
-
-            <div class="space-card card-a">
-              <div class="card-bar"><span></span><span></span><span></span></div>
-              <div class="card-body">
-                <p class="mini-label">Journey redesign</p>
-                <div class="line line-accent"></div>
-                <div class="line line-title"></div>
-                <div class="line line-1"></div>
-                <div class="line line-2"></div>
-                <div class="line line-3"></div>
-                <div class="mini-grid">
-                  <div></div><div></div><div></div><div></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="space-card card-b">
-              <div class="card-bar"><span></span><span></span><span></span></div>
-              <div class="mini-chart">
-                <div class="chart-head"></div>
-                <div class="bars">
-                  <span></span><span></span><span></span><span></span>
-                </div>
-              </div>
-            </div>
-
-            <div class="space-card card-c">
-              <div class="card-bar"><span></span><span></span><span></span></div>
-              <div class="token-stack">
-                <div></div><div></div><div></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div></div>
       </div>
     </section>
 
