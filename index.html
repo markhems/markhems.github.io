@@ -1,273 +1,860 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mark Hems — Lead UX Designer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark Hems — Lead UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-top: #12051f;
+      --bg-mid: #080210;
+      --bg-bottom: #030106;
+      --text: #f6f2ff;
+      --muted: #c7bddf;
+      --pink: #ff4fd8;
+      --cyan: #39d5ff;
+      --violet: #9b5cff;
+      --line: rgba(255,255,255,0.10);
+      --panel: rgba(15, 9, 29, 0.84);
+      --panel-strong: rgba(18, 12, 34, 0.92);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --shadow: 0 28px 80px rgba(0,0,0,0.48);
+      --max-width: 1220px;
+      --transition: 240ms cubic-bezier(.2,.8,.2,1);
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      --horizon-y: 250px;
+      --travel-distance: 400px;
+      --card-duration: 18s;
+      --queue-count: 7;
+      --grid-step: 48px;
+      --queue-width: 420px;
+      --card-aspect: 4 / 3;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    * { box-sizing: border-box; }
 
-<style>
+    html { scroll-behavior: smooth; }
 
-:root{
---horizon:250px;
---travel:400;
---duration:22000;
-}
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Inter", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255,79,216,0.22), transparent 16%),
+        radial-gradient(circle at 54% 20%, rgba(57,213,255,0.10), transparent 18%),
+        radial-gradient(circle at 20% 10%, rgba(155,92,255,0.10), transparent 20%),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 42%, var(--bg-bottom) 100%);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-*{box-sizing:border-box}
+    a {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-body{
-margin:0;
-font-family:Inter;
-background:#06020c;
-color:white;
-overflow-x:hidden;
-}
+    .container {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
 
-.hero{
-height:1200px;
-position:relative;
-overflow:hidden;
-}
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(8, 4, 16, 0.52);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
-/* horizon */
+    .nav {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-.horizon{
-position:absolute;
-top:var(--horizon);
-left:0;
-right:0;
-height:2px;
+    .brand {
+      font-family: "Chakra Petch", sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-shadow:
+        0 0 10px rgba(57,213,255,0.75),
+        0 0 22px rgba(57,213,255,0.28);
+    }
 
-background:linear-gradient(
-90deg,
-transparent,
-#ff4fd8,
-#39d5ff,
-#ff4fd8,
-transparent
-);
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
 
-box-shadow:
-0 0 12px #ff4fd8,
-0 0 20px #39d5ff;
-}
+    .nav-links a {
+      color: var(--muted);
+      transition: color var(--transition), transform var(--transition), text-shadow var(--transition);
+    }
 
-/* grid */
+    .nav-links a:hover {
+      color: #fff;
+      transform: translateY(-1px);
+      text-shadow:
+        0 0 10px rgba(255,79,216,0.55),
+        0 0 16px rgba(57,213,255,0.45);
+    }
 
-.grid{
-position:absolute;
-top:calc(var(--horizon) + 2px);
-left:50%;
-transform:translateX(-50%) perspective(1600px) rotateX(80deg);
-width:200vw;
-height:900px;
-opacity:.35;
-}
+    .hero {
+      position: relative;
+      min-height: 1100px;
+      overflow: hidden;
+      padding: 54px 0 84px;
+    }
 
-.grid-lines-v{
-position:absolute;
-inset:0;
+    .hero-stage {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-background:
-repeating-linear-gradient(
-to right,
-transparent 0 60px,
-#39d5ff 60px 61px
-);
-}
+    .hero-glow {
+      position: absolute;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(760px, 80vw);
+      height: 240px;
+      background:
+        radial-gradient(circle, rgba(255,79,216,0.18) 0%, rgba(57,213,255,0.10) 34%, rgba(0,0,0,0) 72%);
+      filter: blur(34px);
+      opacity: 0.95;
+    }
 
-.grid-lines-h{
-position:absolute;
-inset:0;
+    .hero-horizon {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: var(--horizon-y);
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        rgba(255,79,216,0) 0%,
+        rgba(255,79,216,0.80) 18%,
+        rgba(57,213,255,0.95) 50%,
+        rgba(255,79,216,0.80) 82%,
+        rgba(255,79,216,0) 100%
+      );
+      box-shadow:
+        0 0 12px rgba(255,79,216,0.75),
+        0 0 22px rgba(57,213,255,0.50);
+      z-index: 3;
+    }
 
-background:
-repeating-linear-gradient(
-to bottom,
-transparent 0 60px,
-#ff4fd8 60px 61px
-);
+    .perspective-grid {
+      position: absolute;
+      left: 50%;
+      top: calc(var(--horizon-y) + 1px);
+      width: 210vw;
+      max-width: 2600px;
+      height: 900px;
+      transform: translateX(-50%) perspective(1500px) rotateX(79deg);
+      transform-origin: center top;
+      opacity: 0.30;
+      filter: blur(0.8px);
+      z-index: 2;
+    }
 
-animation:gridMove 22s linear infinite;
-}
+    .grid-vertical,
+    .grid-horizontal {
+      position: absolute;
+      inset: 0;
+    }
 
-@keyframes gridMove{
+    .grid-vertical {
+      background:
+        repeating-linear-gradient(
+          to right,
+          transparent 0 calc(var(--grid-step) - 1px),
+          rgba(57,213,255,0.56) calc(var(--grid-step) - 1px) var(--grid-step)
+        );
+    }
 
-from{background-position:0 0}
-to{background-position:0 60px}
+    .grid-horizontal {
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0 calc(var(--grid-step) - 1px),
+          rgba(255,79,216,0.34) calc(var(--grid-step) - 1px) var(--grid-step)
+        );
+      animation: gridDrift var(--card-duration) linear infinite;
+    }
 
-}
+    @keyframes gridDrift {
+      from { background-position: 0 0; }
+      to { background-position: 0 var(--travel-distance); }
+    }
 
-/* queue */
+    .hero-grid {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: minmax(0, 520px) 1fr;
+      gap: 48px;
+      align-items: start;
+    }
 
-.queue{
-position:absolute;
-top:var(--horizon);
-left:50%;
-transform:translateX(-50%);
-width:420px;
-height:420px;
-pointer-events:none;
-}
+    .hero-copy {
+      position: relative;
+      z-index: 20;
+      padding-top: 0;
+    }
 
-.card{
+    .eyebrow,
+    .section-label,
+    .project-type,
+    .stat-label {
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cyan);
+      text-shadow:
+        0 0 10px rgba(57,213,255,0.78),
+        0 0 22px rgba(57,213,255,0.34);
+      font-family: "Chakra Petch", sans-serif;
+    }
 
-position:absolute;
-left:50%;
-top:0;
+    h1, h2, h3 {
+      font-family: "Chakra Petch", sans-serif;
+      margin: 0;
+    }
 
-width:420px;
-aspect-ratio:4/3;
+    h1 {
+      font-size: clamp(66px, 11vw, 132px);
+      line-height: 0.82;
+      letter-spacing: -0.05em;
+      text-shadow:
+        0 0 18px rgba(255,79,216,0.14),
+        0 0 34px rgba(57,213,255,0.10);
+    }
 
-transform-origin:center top;
+    .hero-tagline {
+      margin: 16px 0 0;
+      max-width: 25ch;
+      font-size: clamp(18px, 1.5vw, 21px);
+      line-height: 1.35;
+      color: #e6def8;
+    }
 
-border-radius:20px;
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
 
-background:rgba(18,12,34,.95);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      font-family: "Chakra Petch", sans-serif;
+      font-weight: 700;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      backdrop-filter: blur(10px);
+    }
 
-border:1px solid rgba(255,255,255,.1);
+    .btn:hover { transform: translateY(-2px) scale(1.02); }
 
-box-shadow:0 30px 80px rgba(0,0,0,.6);
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), var(--cyan));
+      color: #14051e;
+      border-color: transparent;
+      box-shadow:
+        0 10px 26px rgba(255,79,216,0.24),
+        0 10px 24px rgba(57,213,255,0.14);
+    }
 
-backdrop-filter:blur(8px);
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
 
-pointer-events:auto;
-cursor:pointer;
+    .hero-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
 
-display:flex;
-align-items:flex-end;
+    .hero-meta span,
+    .travel-pill,
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #e2daf6;
+      font-size: 13px;
+    }
 
-}
+    .hero-right {
+      position: relative;
+      min-height: 760px;
+    }
 
-.card-body{
-padding:20px;
-}
+    /* Conveyor queue */
+    .hero-card-track {
+      position: absolute;
+      top: var(--horizon-y);
+      left: 50%;
+      width: var(--queue-width);
+      height: calc(var(--travel-distance) + 240px);
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 8;
+    }
 
-.card h3{
-margin:0;
-font-family:"Chakra Petch";
-font-size:22px;
-}
+    .travel-card {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100%;
+      aspect-ratio: var(--card-aspect);
+      transform-origin: center top;
+      transform: translateX(-50%) scale(0.14);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      pointer-events: auto;
+      will-change: transform, opacity;
+    }
 
-.card p{
-margin:4px 0 0 0;
-font-size:14px;
-color:#bcb4d4;
-}
+    .travel-card:hover {
+      border-color: rgba(57,213,255,0.34);
+      box-shadow:
+        0 22px 64px rgba(0,0,0,0.42),
+        0 0 16px rgba(57,213,255,0.26),
+        0 0 26px rgba(255,79,216,0.14);
+    }
 
-/* hero text */
+    .travel-card-media {
+      height: 40%;
+      background:
+        linear-gradient(180deg, rgba(57,213,255,0.10), rgba(255,79,216,0.06)),
+        #171024;
+    }
 
-.hero-content{
-position:absolute;
-top:40px;
-left:50%;
-transform:translateX(-50%);
-width:1100px;
-display:flex;
-justify-content:space-between;
-}
+    .travel-card-body {
+      height: 60%;
+      padding: 18px;
+      display: grid;
+      gap: 8px;
+      background: rgba(18, 12, 34, 0.98);
+    }
 
-.hero-title{
-font-family:"Chakra Petch";
-font-size:120px;
-line-height:.8;
-}
+    .travel-card-body h3 {
+      font-size: 24px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
 
-.hero-tag{
-margin-top:10px;
-font-size:18px;
-max-width:320px;
-color:#ccc;
-}
+    .travel-card-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
 
-</style>
+    .travel-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .travel-cta {
+      margin-top: 2px;
+      color: #fff;
+      font-family: "Chakra Petch", sans-serif;
+      font-size: 14px;
+      text-shadow:
+        0 0 10px rgba(57,213,255,0.75),
+        0 0 20px rgba(57,213,255,0.30);
+    }
+
+    .section {
+      position: relative;
+      padding: 88px 0;
+      z-index: 2;
+    }
+
+    .section-soft {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    h2 {
+      font-size: clamp(38px, 4vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      text-shadow: 0 0 18px rgba(57,213,255,0.08);
+    }
+
+    .section-head { margin-bottom: 28px; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+    }
+
+    .project-stack {
+      display: grid;
+      gap: 24px;
+    }
+
+    .project-card,
+    .stat-card,
+    .contact-card {
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius-xl);
+      background: var(--panel-strong);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    .project-card {
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px) scale(1.01);
+      border-color: rgba(57,213,255,0.30);
+    }
+
+    .project-image {
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(180deg, rgba(57,213,255,0.08), rgba(255,79,216,0.06)),
+        #12091f;
+    }
+
+    .project-image-large { aspect-ratio: 16 / 12.5; }
+
+    .project-content,
+    .stat-card,
+    .contact-card {
+      padding: 24px;
+    }
+
+    .project-content h3 {
+      margin-top: 8px;
+      font-size: clamp(24px, 2vw, 34px);
+      line-height: 1.04;
+    }
+
+    .project-content p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .about-copy p,
+    .contact-card p {
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .stat-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 22px;
+      margin-top: 8px;
+      font-family: "Chakra Petch", sans-serif;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      font-family: "Chakra Petch", sans-serif;
+      font-weight: 700;
+    }
+
+    @media (max-width: 1040px) {
+      .hero-grid,
+      .project-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 1280px;
+      }
+
+      .hero-right {
+        min-height: 620px;
+      }
+
+      .hero-card-track {
+        width: min(420px, 86vw);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .hero {
+        min-height: 1180px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-card-track {
+        width: min(390px, 88vw);
+      }
+
+      .travel-card-body h3 {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">Mark Hems</div>
+      <nav class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<section class="hero">
+  <main>
+    <section class="hero">
+      <div class="hero-stage" aria-hidden="true">
+        <div class="hero-glow"></div>
+        <div class="hero-horizon"></div>
 
-<div class="hero-content">
+        <div class="perspective-grid">
+          <div class="grid-vertical"></div>
+          <div class="grid-horizontal"></div>
+        </div>
 
-<div>
-<div class="hero-title">Mark<br>Hems</div>
-<div class="hero-tag">Lead UX Designer</div>
-</div>
+        <div class="hero-card-track" id="heroCardTrack">
+          <a class="travel-card" href="#work">
+            <div class="travel-card-media"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Journey optimisation</p>
+              <h3>Energy renewal journey redesign</h3>
+              <p>Reducing friction and improving clarity in a commercially sensitive renewal flow.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Lead UX</span>
+                <span class="travel-pill">Research</span>
+                <span class="travel-pill">Service design</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
 
-</div>
+          <a class="travel-card" href="#work">
+            <div class="travel-card-media"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Service design</p>
+              <h3>Insurance journey deconstruction</h3>
+              <p>Untangling complex logic and information architecture into a clearer scalable structure.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">IA</span>
+                <span class="travel-pill">Mapping</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
 
-<div class="horizon"></div>
+          <a class="travel-card" href="#work">
+            <div class="travel-card-media"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Research & experimentation</p>
+              <h3>Evidence-led UX optimisation</h3>
+              <p>Using testing and behavioural evidence to drive measurable product improvements.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Testing</span>
+                <span class="travel-pill">Experiments</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
 
-<div class="grid">
-<div class="grid-lines-v"></div>
-<div class="grid-lines-h"></div>
-</div>
+          <a class="travel-card" href="#work">
+            <div class="travel-card-media"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Operational complexity</p>
+              <h3>Designing across user and agent workflows</h3>
+              <p>Aligning customer-facing journeys with agent tooling and service dependencies.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Systems</span>
+                <span class="travel-pill">Workflow</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
 
-<div class="queue" id="queue">
+          <a class="travel-card" href="#work">
+            <div class="travel-card-media"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Strategy & clarity</p>
+              <h3>Turning complexity into guided decision-making</h3>
+              <p>Designing flows that help users understand, choose, and progress with confidence.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Strategy</span>
+                <span class="travel-pill">UX</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
 
-<div class="card"><div class="card-body"><h3>Energy Renewal UX</h3><p>Journey redesign</p></div></div>
+          <a class="travel-card" href="#work">
+            <div class="travel-card-media"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Systems thinking</p>
+              <h3>Designing for complexity at scale</h3>
+              <p>Balancing user needs, operational constraints and commercial goals.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Systems</span>
+                <span class="travel-pill">Service UX</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
 
-<div class="card"><div class="card-body"><h3>Insurance Architecture</h3><p>Complex IA system</p></div></div>
+          <a class="travel-card" href="#work">
+            <div class="travel-card-media"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Conversion clarity</p>
+              <h3>Guided journeys that reduce ambiguity</h3>
+              <p>Helping users choose, understand and progress with confidence.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Clarity</span>
+                <span class="travel-pill">UX strategy</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
+        </div>
+      </div>
 
-<div class="card"><div class="card-body"><h3>UX Experimentation</h3><p>Evidence-driven optimisation</p></div></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Lead UX Designer</p>
+          <h1>Mark<br>Hems</h1>
+          <p class="hero-tagline">
+            Designing clearer journeys for complex products and services.
+          </p>
 
-<div class="card"><div class="card-body"><h3>Agent Workflow Design</h3><p>Operational tooling</p></div></div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">View work</a>
+            <a class="btn btn-secondary" href="#contact">Contact</a>
+          </div>
 
-<div class="card"><div class="card-body"><h3>Decision Frameworks</h3><p>Guided product flows</p></div></div>
+          <div class="hero-meta">
+            <span>Research-led</span>
+            <span>Service design</span>
+            <span>Journey optimisation</span>
+          </div>
+        </div>
 
-<div class="card"><div class="card-body"><h3>Conversion Optimisation</h3><p>Behavioural UX</p></div></div>
+        <div class="hero-right"></div>
+      </div>
+    </section>
 
-<div class="card"><div class="card-body"><h3>Service Mapping</h3><p>System redesign</p></div></div>
+    <section id="work" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label">Selected work</p>
+          <h2>Featured case studies</h2>
+        </div>
 
-</div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-image project-image-large"></div>
+            <div class="project-content">
+              <p class="project-type">Journey optimisation</p>
+              <h3>Energy renewal journey redesign</h3>
+              <p>Reframing a high-friction renewal experience to improve clarity, confidence, and conversion.</p>
+              <div class="chip-row">
+                <span class="chip">Lead UX</span>
+                <span class="chip">Research</span>
+                <span class="chip">Service design</span>
+              </div>
+            </div>
+          </article>
 
-</section>
+          <div class="project-stack">
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <p class="project-type">Service design</p>
+                <h3>Insurance journey deconstruction</h3>
+                <p>Simplifying a logic-heavy insurance flow through clearer IA, structure and conditional logic.</p>
+                <div class="chip-row">
+                  <span class="chip">IA</span>
+                  <span class="chip">Mapping</span>
+                </div>
+              </div>
+            </article>
 
-<script>
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <p class="project-type">Research & experimentation</p>
+                <h3>Evidence-led UX optimisation</h3>
+                <p>Using testing and behavioural evidence to guide higher-value product and service decisions.</p>
+                <div class="chip-row">
+                  <span class="chip">Testing</span>
+                  <span class="chip">Experiments</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-const cards=[...document.querySelectorAll(".card")]
+    <section id="about" class="section section-soft">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <p class="section-label">About</p>
+          <h2>I design for clarity, confidence and momentum.</h2>
+          <p>
+            I’m a Lead UX Designer focused on complex digital services, journey optimisation,
+            research-led design, service design and information architecture.
+          </p>
+          <p>
+            My strongest work sits where user needs, operational complexity and business goals collide.
+          </p>
+        </div>
 
-const duration=22000
-const travel=400
-const count=cards.length
+        <div class="stat-stack">
+          <div class="stat-card">
+            <p class="stat-label">Focus</p>
+            <strong>Complex journeys</strong>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Approach</p>
+            <strong>Evidence-led design</strong>
+          </div>
+          <div class="stat-card">
+            <p class="stat-label">Strength</p>
+            <strong>Reducing ambiguity</strong>
+          </div>
+        </div>
+      </div>
+    </section>
 
-function render(time){
+    <section id="contact" class="section">
+      <div class="container contact-card">
+        <p class="section-label">Contact</p>
+        <h2>Let’s talk.</h2>
+        <p>For senior UX roles, freelance opportunities or design conversations.</p>
 
-const t=time%duration
+        <div class="contact-links">
+          <a href="mailto:your@email.com">your@email.com</a>
+          <a href="https://github.com/markhems" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-cards.forEach((card,i)=>{
+  <script>
+    (() => {
+      const cards = Array.from(document.querySelectorAll('#heroCardTrack .travel-card'));
+      const duration = 18000;
+      const travel = 400;
+      const count = cards.length;
+      const gap = 0.085; // tight queue
 
-const offset=(i/count)*duration
-const p=((t+offset)%duration)/duration
+      function render(now) {
+        const t = (now % duration) / duration;
 
-const y=p*travel
+        cards.forEach((card, index) => {
+          let p = t + index * gap;
+          p = p - Math.floor(p); // 0..1 loop
 
-const scale=0.1 + p*0.9
+          const y = p * travel;
+          const scale = 0.14 + p * 0.86;
+          const rotX = 50 - p * 50;
+          const opacity = p >= 0.999 ? 0 : 1;
+          const z = 1000 + Math.floor(p * 1000);
 
-if(p>0.98){
-card.style.opacity=0
-}else{
-card.style.opacity=1
-}
+          card.style.transform = `translate(-50%, ${y}px) rotateX(${rotX}deg) scale(${scale})`;
+          card.style.opacity = opacity;
+          card.style.zIndex = z;
+        });
 
-card.style.transform=
-`translate(-50%,${y}px) scale(${scale})`
+        requestAnimationFrame(render);
+      }
 
-card.style.zIndex=Math.floor(scale*100)
-
-})
-
-requestAnimationFrame(render)
-
-}
-
-requestAnimationFrame(render)
-
-</script>
-
+      requestAnimationFrame(render);
+    })();
+  </script>
 </body>
 </html>
