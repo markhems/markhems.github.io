@@ -13,8 +13,8 @@
       --muted: #c7bddf;
       --pink: #ff4fd8;
       --cyan: #39d5ff;
-      --panel: rgba(16, 10, 29, 0.78);
-      --panel-strong: rgba(22, 14, 40, 0.86);
+      --panel: rgba(16, 10, 29, 0.82);
+      --panel-strong: rgba(22, 14, 40, 0.88);
       --line: rgba(255, 255, 255, 0.10);
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
       --radius-xl: 30px;
@@ -35,13 +35,8 @@
         0 0 44px rgba(155, 92, 255, 0.3);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -119,10 +114,7 @@
 
     .nav-links a {
       color: var(--muted);
-      transition:
-        color var(--transition),
-        text-shadow var(--transition),
-        transform var(--transition);
+      transition: color var(--transition), text-shadow var(--transition), transform var(--transition);
     }
 
     .nav-links a:hover {
@@ -135,7 +127,7 @@
       position: relative;
       padding: 48px 0 72px;
       overflow: hidden;
-      min-height: 860px;
+      min-height: 1150px;
     }
 
     .hero-grid {
@@ -199,11 +191,7 @@
       border-radius: 999px;
       font-weight: 700;
       border: 1px solid rgba(255,255,255,0.10);
-      transition:
-        transform var(--transition),
-        box-shadow var(--transition),
-        border-color var(--transition),
-        background var(--transition);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
       backdrop-filter: blur(10px);
       font-family: "Chakra Petch", sans-serif;
       letter-spacing: 0.01em;
@@ -216,9 +204,7 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--pink), var(--cyan));
       color: #14051e;
-      box-shadow:
-        0 12px 30px rgba(255,79,216,0.24),
-        0 10px 24px rgba(57,213,255,0.14);
+      box-shadow: 0 12px 30px rgba(255,79,216,0.24), 0 10px 24px rgba(57,213,255,0.14);
       border-color: transparent;
     }
 
@@ -268,7 +254,7 @@
 
     .hero-right {
       position: relative;
-      min-height: 780px;
+      min-height: 980px;
       z-index: 5;
     }
 
@@ -358,7 +344,7 @@
 
     @keyframes forwardMotion {
       from { background-position: 0 0; }
-      to   { background-position: 0 94px; }
+      to { background-position: 0 94px; }
     }
 
     .grid-fade {
@@ -375,12 +361,13 @@
       z-index: 4;
     }
 
+    /* Completely redone queue */
     .hero-card-track {
       position: absolute;
       left: 50%;
-      top: 120px;
+      top: 20px;
       width: 100%;
-      height: 560px;
+      height: 920px;
       transform: translateX(-50%);
       pointer-events: none;
       z-index: 5;
@@ -400,10 +387,8 @@
       backdrop-filter: blur(12px);
       pointer-events: auto;
       cursor: pointer;
-      transition:
-        border-color var(--transition),
-        box-shadow var(--transition);
-      animation: travelCard 20s linear infinite;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      animation: queueCard 20s linear infinite;
     }
 
     .travel-card:hover {
@@ -420,37 +405,41 @@
     .travel-card.card-4 { animation-delay: -12s; }
     .travel-card.card-5 { animation-delay: -16s; }
 
-    @keyframes travelCard {
+    @keyframes queueCard {
       0% {
-        transform: translate(-50%, 0px) rotateX(58deg) scale(0.06);
+        transform: translate(-50%, 0px) rotateX(60deg) scale(0.08);
         opacity: 1;
       }
-      20% {
-        transform: translate(-50%, 20px) rotateX(52deg) scale(0.18);
+      15% {
+        transform: translate(-50%, 40px) rotateX(56deg) scale(0.16);
         opacity: 1;
       }
-      40% {
-        transform: translate(-50%, 68px) rotateX(40deg) scale(0.38);
+      30% {
+        transform: translate(-50%, 140px) rotateX(48deg) scale(0.30);
         opacity: 1;
       }
-      60% {
-        transform: translate(-50%, 152px) rotateX(24deg) scale(0.64);
+      50% {
+        transform: translate(-50%, 300px) rotateX(34deg) scale(0.52);
         opacity: 1;
       }
-      78% {
-        transform: translate(-50%, 264px) rotateX(10deg) scale(0.88);
+      70% {
+        transform: translate(-50%, 520px) rotateX(18deg) scale(0.78);
         opacity: 1;
       }
-      92% {
-        transform: translate(-50%, 356px) rotateX(2deg) scale(1.02);
+      85% {
+        transform: translate(-50%, 700px) rotateX(8deg) scale(0.96);
         opacity: 1;
       }
-      97% {
-        transform: translate(-50%, 388px) rotateX(0deg) scale(1.08);
+      94% {
+        transform: translate(-50%, 800px) rotateX(2deg) scale(1.06);
+        opacity: 1;
+      }
+      98% {
+        transform: translate(-50%, 820px) rotateX(0deg) scale(1.10);
         opacity: 0;
       }
       100% {
-        transform: translate(-50%, 0px) rotateX(58deg) scale(0.06);
+        transform: translate(-50%, 0px) rotateX(60deg) scale(0.08);
         opacity: 0;
       }
     }
@@ -458,7 +447,7 @@
     .travel-card-media {
       position: relative;
       overflow: hidden;
-      height: 180px;
+      height: 150px;
       background-color: #12091f;
       background-size: cover;
       background-position: center;
@@ -599,13 +588,9 @@
       text-shadow: 0 0 18px rgba(57,213,255,0.08);
     }
 
-    h3 {
-      letter-spacing: -0.03em;
-    }
+    h3 { letter-spacing: -0.03em; }
 
-    .section-head {
-      margin-bottom: 28px;
-    }
+    .section-head { margin-bottom: 28px; }
 
     .project-grid {
       display: grid;
@@ -625,10 +610,7 @@
       background: var(--panel);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
-      transition:
-        transform var(--transition),
-        border-color var(--transition),
-        box-shadow var(--transition);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
     }
 
     .project-card:hover {
@@ -650,9 +632,7 @@
         #12091f;
     }
 
-    .project-image-large {
-      aspect-ratio: 16 / 12.5;
-    }
+    .project-image-large { aspect-ratio: 16 / 12.5; }
 
     .project-image::before {
       content: "";
@@ -712,9 +692,7 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .project-content {
-      padding: 22px;
-    }
+    .project-content { padding: 22px; }
 
     .project-content h3 {
       margin: 10px 0 0;
@@ -769,10 +747,7 @@
       background: var(--panel);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
-      transition:
-        transform var(--transition),
-        border-color var(--transition),
-        box-shadow var(--transition);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
     }
 
     .stat-card:hover {
@@ -817,10 +792,7 @@
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       font-weight: 700;
-      transition:
-        transform var(--transition),
-        border-color var(--transition),
-        box-shadow var(--transition);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
       backdrop-filter: blur(10px);
       font-family: "Chakra Petch", sans-serif;
     }
@@ -842,16 +814,16 @@
       }
 
       .hero {
-        min-height: 1080px;
+        min-height: 1280px;
       }
 
       .hero-right {
-        min-height: 540px;
+        min-height: 860px;
       }
 
       .hero-card-track {
-        top: 120px;
-        height: 460px;
+        top: 10px;
+        height: 820px;
       }
 
       .travel-card {
@@ -865,13 +837,11 @@
         padding: 16px 0;
       }
 
-      .nav-links {
-        justify-content: center;
-      }
+      .nav-links { justify-content: center; }
 
       .hero {
         padding-top: 40px;
-        min-height: 1040px;
+        min-height: 1160px;
       }
 
       .hero-actions {
@@ -879,13 +849,9 @@
         align-items: stretch;
       }
 
-      .hero-grid {
-        gap: 28px;
-      }
+      .hero-grid { gap: 28px; }
 
-      .hero-horizon {
-        top: 32%;
-      }
+      .hero-horizon { top: 32%; }
 
       .perspective-grid-wrap {
         top: calc(32% + 1px);
@@ -896,21 +862,20 @@
       }
 
       .hero-right {
-        min-height: 520px;
+        min-height: 760px;
       }
 
       .hero-card-track {
-        top: 100px;
-        height: 420px;
+        top: 0;
+        height: 720px;
       }
 
       .travel-card {
-        top: 0;
         width: min(390px, 88vw);
       }
 
       .travel-card-media {
-        height: 160px;
+        height: 140px;
       }
 
       .travel-card-body h3 {
