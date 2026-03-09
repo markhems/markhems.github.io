@@ -13,21 +13,16 @@
       --muted: #c7bddf;
       --pink: #ff4fd8;
       --cyan: #39d5ff;
-      --panel: rgba(16, 10, 29, 0.88);
+      --panel: rgba(18, 12, 34, 0.96);
       --panel-strong: rgba(22, 14, 40, 0.90);
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
       --radius-xl: 28px;
       --radius-lg: 22px;
       --max-width: 1220px;
       --transition: 260ms cubic-bezier(.2,.8,.2,1);
-      --glow-pink:
-        0 0 10px rgba(255, 79, 216, 0.8),
-        0 0 24px rgba(255, 79, 216, 0.55),
-        0 0 48px rgba(255, 79, 216, 0.28);
-      --glow-cyan:
-        0 0 10px rgba(57, 213, 255, 0.8),
-        0 0 24px rgba(57, 213, 255, 0.55),
-        0 0 48px rgba(57, 213, 255, 0.28);
+      --horizon-y: 250px;
+      --travel-distance: 600px;
+      --queue-duration: 14000ms;
     }
 
     * { box-sizing: border-box; }
@@ -86,7 +81,9 @@
       font-family: "Chakra Petch", sans-serif;
       font-weight: 700;
       letter-spacing: -0.02em;
-      text-shadow: var(--glow-cyan);
+      text-shadow:
+        0 0 10px rgba(57,213,255,0.8),
+        0 0 24px rgba(57,213,255,0.55);
     }
 
     .nav-links {
@@ -102,7 +99,9 @@
 
     .nav-links a:hover {
       color: #fff;
-      text-shadow: 0 0 12px rgba(255, 79, 216, 0.7), 0 0 22px rgba(57, 213, 255, 0.65);
+      text-shadow:
+        0 0 12px rgba(255,79,216,0.7),
+        0 0 22px rgba(57,213,255,0.65);
       transform: translateY(-1px);
     }
 
@@ -115,7 +114,7 @@
 
     .hero-grid {
       position: relative;
-      z-index: 6;
+      z-index: 20;
       display: grid;
       grid-template-columns: minmax(0, 520px) 1fr;
       gap: 48px;
@@ -132,7 +131,9 @@
       font-size: 12px;
       font-weight: 700;
       color: var(--cyan);
-      text-shadow: var(--glow-cyan);
+      text-shadow:
+        0 0 10px rgba(57,213,255,0.8),
+        0 0 24px rgba(57,213,255,0.55);
       font-family: "Chakra Petch", sans-serif;
     }
 
@@ -152,7 +153,8 @@
 
     .hero-copy {
       position: relative;
-      z-index: 7;
+      z-index: 21;
+      padding-top: 8px;
     }
 
     .hero-tagline {
@@ -216,10 +218,6 @@
       backdrop-filter: blur(10px);
     }
 
-    .hero-right {
-      min-height: 900px;
-    }
-
     .hero-stage {
       position: absolute;
       inset: 0;
@@ -246,7 +244,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      top: 250px;
+      top: var(--horizon-y);
       height: 2px;
       background: linear-gradient(
         90deg,
@@ -256,14 +254,18 @@
         rgba(255,79,216,0.85) 82%,
         rgba(255,79,216,0) 100%
       );
-      box-shadow: var(--glow-pink), var(--glow-cyan);
+      box-shadow:
+        0 0 10px rgba(255,79,216,0.8),
+        0 0 24px rgba(255,79,216,0.55),
+        0 0 10px rgba(57,213,255,0.8),
+        0 0 24px rgba(57,213,255,0.55);
       z-index: 3;
     }
 
     .perspective-grid-wrap {
       position: absolute;
       left: 50%;
-      top: 252px;
+      top: calc(var(--horizon-y) + 2px);
       width: 190vw;
       max-width: 2400px;
       height: 980px;
@@ -323,11 +325,11 @@
       z-index: 4;
     }
 
-    /* New queue from scratch */
+    /* Queue starts at top of page */
     .hero-card-track {
       position: absolute;
       left: 50%;
-      top: 250px;
+      top: 0;
       width: min(900px, 92vw);
       height: 900px;
       transform: translateX(-50%);
@@ -338,19 +340,18 @@
     .travel-card {
       position: absolute;
       left: 50%;
-      bottom: 0;
+      top: 0;
       width: min(430px, 90%);
       transform-origin: center bottom;
       border-radius: var(--radius-xl);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(18, 12, 34, 0.94);
+      background: var(--panel);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
       pointer-events: auto;
       cursor: pointer;
       transition: border-color var(--transition), box-shadow var(--transition);
-      animation: cardQueue 15s linear infinite;
     }
 
     .travel-card:hover {
@@ -361,51 +362,9 @@
         0 0 28px rgba(255,79,216,0.14);
     }
 
-    /* front card always above back card */
-    .travel-card.card-1 { animation-delay: 0s; z-index: 6; }
-    .travel-card.card-2 { animation-delay: -3s; z-index: 5; }
-    .travel-card.card-3 { animation-delay: -6s; z-index: 4; }
-    .travel-card.card-4 { animation-delay: -9s; z-index: 3; }
-    .travel-card.card-5 { animation-delay: -12s; z-index: 2; }
-
-    @keyframes cardQueue {
-      0% {
-        transform: translate(-50%, 0px) rotateX(58deg) scale(0.10);
-        opacity: 1;
-      }
-      20% {
-        transform: translate(-50%, 70px) rotateX(50deg) scale(0.22);
-        opacity: 1;
-      }
-      40% {
-        transform: translate(-50%, 170px) rotateX(38deg) scale(0.38);
-        opacity: 1;
-      }
-      60% {
-        transform: translate(-50%, 310px) rotateX(24deg) scale(0.58);
-        opacity: 1;
-      }
-      80% {
-        transform: translate(-50%, 470px) rotateX(10deg) scale(0.82);
-        opacity: 1;
-      }
-      94% {
-        transform: translate(-50%, 600px) rotateX(2deg) scale(1.02);
-        opacity: 1;
-      }
-      98% {
-        transform: translate(-50%, 620px) rotateX(0deg) scale(1.06);
-        opacity: 0;
-      }
-      100% {
-        transform: translate(-50%, 0px) rotateX(58deg) scale(0.10);
-        opacity: 0;
-      }
-    }
-
     .travel-card-media {
       height: 150px;
-      background-color: #171024;
+      background: #171024;
     }
 
     .travel-card-body {
@@ -449,7 +408,9 @@
       margin-top: 2px;
       color: #fff;
       font-family: "Chakra Petch", sans-serif;
-      text-shadow: var(--glow-cyan);
+      text-shadow:
+        0 0 10px rgba(57,213,255,0.8),
+        0 0 24px rgba(57,213,255,0.55);
       font-size: 14px;
     }
 
@@ -473,7 +434,6 @@
       text-shadow: 0 0 18px rgba(57,213,255,0.08);
     }
 
-    h3 { letter-spacing: -0.03em; }
     .section-head { margin-bottom: 28px; }
 
     .project-grid {
@@ -488,7 +448,7 @@
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: var(--radius-xl);
       overflow: hidden;
-      background: var(--panel);
+      background: var(--panel-strong);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
       transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
@@ -497,16 +457,10 @@
     .project-card:hover {
       transform: translateY(-5px) scale(1.01);
       border-color: rgba(57,213,255,0.30);
-      box-shadow:
-        0 30px 90px rgba(0,0,0,0.42),
-        0 0 18px rgba(57,213,255,0.28),
-        0 0 28px rgba(255,79,216,0.14);
     }
 
     .project-image {
       aspect-ratio: 16 / 10;
-      position: relative;
-      overflow: hidden;
       background:
         radial-gradient(circle at 30% 20%, rgba(255,79,216,0.14), transparent 20%),
         linear-gradient(180deg, rgba(57,213,255,0.08), rgba(255,79,216,0.06)),
@@ -514,77 +468,7 @@
     }
 
     .project-image-large { aspect-ratio: 16 / 12.5; }
-
-    .project-image::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -12%;
-      transform: translateX(-50%) perspective(800px) rotateX(76deg);
-      width: 150%;
-      height: 70%;
-      background:
-        linear-gradient(to bottom, rgba(255,79,216,0.12), rgba(57,213,255,0.05) 26%, transparent 60%),
-        repeating-linear-gradient(to right, rgba(57,213,255,0.22) 0 2px, transparent 2px 54px),
-        repeating-linear-gradient(to top, rgba(255,79,216,0.18) 0 2px, transparent 2px 54px);
-      opacity: 0.72;
-      pointer-events: none;
-    }
-
-    .project-image-lines {
-      position: absolute;
-      inset: 20px;
-      display: grid;
-      gap: 10px;
-      align-content: start;
-      z-index: 2;
-    }
-
-    .project-image-lines span {
-      display: block;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-    }
-
-    .project-image-lines span:nth-child(1) { width: 24%; background: linear-gradient(90deg, var(--pink), var(--cyan)); }
-    .project-image-lines span:nth-child(2) { width: 58%; height: 18px; background: rgba(255,255,255,0.18); }
-    .project-image-lines span:nth-child(3) { width: 100%; }
-    .project-image-lines span:nth-child(4) { width: 82%; }
-    .project-image-lines span:nth-child(5) { width: 64%; }
-
-    .project-mini-cards {
-      position: absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      z-index: 2;
-    }
-
-    .project-mini-cards div {
-      aspect-ratio: 1.1 / 0.8;
-      border-radius: 16px;
-      background:
-        linear-gradient(180deg, rgba(57,213,255,0.12), rgba(255,79,216,0.08)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
     .project-content { padding: 22px; }
-
-    .project-content h3 {
-      margin: 10px 0 0;
-      font-size: clamp(24px, 2vw, 34px);
-      line-height: 1.04;
-    }
-
-    .project-content p {
-      margin: 12px 0 0;
-      color: var(--muted);
-    }
 
     .chip-row {
       display: flex;
@@ -600,7 +484,6 @@
       background: rgba(255,255,255,0.04);
       color: #e2daf6;
       font-size: 14px;
-      backdrop-filter: blur(10px);
     }
 
     .about-grid {
@@ -622,16 +505,14 @@
       padding: 24px;
       border-radius: var(--radius-lg);
       border: 1px solid rgba(255,255,255,0.10);
-      background: var(--panel);
+      background: var(--panel-strong);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
     }
 
     .stat-card strong {
       display: block;
       font-size: 22px;
-      letter-spacing: -0.02em;
       margin-top: 8px;
       font-family: "Chakra Petch", sans-serif;
     }
@@ -661,8 +542,6 @@
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       font-weight: 700;
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-      backdrop-filter: blur(10px);
       font-family: "Chakra Petch", sans-serif;
     }
 
@@ -701,20 +580,8 @@
 
       .hero-grid { gap: 28px; }
 
-      .hero-horizon { top: 250px; }
-
-      .perspective-grid-wrap {
-        top: 252px;
-        width: 250vw;
-        height: 860px;
-        transform: translateX(-50%) perspective(1100px) rotateX(80deg);
-        opacity: 0.24;
-      }
-
       .hero-card-track {
-        top: 250px;
         width: 94vw;
-        height: 780px;
       }
 
       .travel-card {
@@ -727,10 +594,6 @@
 
       .travel-card-body h3 {
         font-size: 22px;
-      }
-
-      .project-mini-cards {
-        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -758,8 +621,8 @@
         </div>
         <div class="grid-fade"></div>
 
-        <div class="hero-card-track">
-          <a class="travel-card card-1" href="#work">
+        <div class="hero-card-track" id="heroCardTrack">
+          <a class="travel-card" href="#work">
             <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Journey optimisation</p>
@@ -774,7 +637,7 @@
             </div>
           </a>
 
-          <a class="travel-card card-2" href="#work">
+          <a class="travel-card" href="#work">
             <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Service design</p>
@@ -788,7 +651,7 @@
             </div>
           </a>
 
-          <a class="travel-card card-3" href="#work">
+          <a class="travel-card" href="#work">
             <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Research & experimentation</p>
@@ -802,7 +665,7 @@
             </div>
           </a>
 
-          <a class="travel-card card-4" href="#work">
+          <a class="travel-card" href="#work">
             <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Operational complexity</p>
@@ -816,7 +679,7 @@
             </div>
           </a>
 
-          <a class="travel-card card-5" href="#work">
+          <a class="travel-card" href="#work">
             <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Strategy & clarity</p>
@@ -865,14 +728,7 @@
 
         <div class="project-grid">
           <article class="project-card">
-            <div class="project-image project-image-large">
-              <div class="project-image-lines">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
-              <div class="project-mini-cards">
-                <div></div><div></div><div></div>
-              </div>
-            </div>
+            <div class="project-image project-image-large"></div>
             <div class="project-content">
               <p class="project-type">Journey optimisation</p>
               <h3>Energy renewal journey redesign</h3>
@@ -962,5 +818,44 @@
       </div>
     </section>
   </main>
+
+  <script>
+    (() => {
+      const cards = Array.from(document.querySelectorAll('#heroCardTrack .travel-card'));
+      const duration = 15000;
+      const travel = 600;
+      const count = cards.length;
+
+      function ease(t) {
+        return t * t * (3 - 2 * t);
+      }
+
+      function render(now) {
+        const time = now % duration;
+
+        cards.forEach((card, index) => {
+          const offset = (index / count) * duration;
+          const p = ((time + offset) % duration) / duration;
+          const e = ease(p);
+
+          const y = e * travel;
+          const scale = 0.10 + e * 0.92;
+          const rotX = 58 - e * 58;
+          const opacity = p > 0.94 ? Math.max(0, 1 - ((p - 0.94) / 0.06)) : 1;
+
+          const frontness = e;
+          const z = Math.floor(frontness * 1000);
+
+          card.style.transform = `translate(-50%, ${y}px) rotateX(${rotX}deg) scale(${scale})`;
+          card.style.opacity = opacity.toFixed(3);
+          card.style.zIndex = String(z);
+        });
+
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+    })();
+  </script>
 </body>
 </html>
