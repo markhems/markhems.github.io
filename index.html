@@ -14,7 +14,7 @@
       --pink: #ff4fd8;
       --cyan: #39d5ff;
       --violet: #9b5cff;
-      --panel: rgba(16, 10, 29, 0.70);
+      --panel: rgba(16, 10, 29, 0.72);
       --panel-strong: rgba(22, 14, 40, 0.84);
       --line: rgba(255, 255, 255, 0.10);
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
@@ -136,12 +136,12 @@
       position: relative;
       padding: 88px 0 72px;
       overflow: hidden;
-      min-height: 780px;
+      min-height: 820px;
     }
 
     .hero-grid {
       position: relative;
-      z-index: 3;
+      z-index: 4;
       display: grid;
       grid-template-columns: minmax(0, 520px) 1fr;
       gap: 48px;
@@ -263,14 +263,14 @@
 
     .hero-copy {
       position: relative;
-      z-index: 4;
+      z-index: 5;
       padding-top: 6px;
     }
 
     .hero-right {
       position: relative;
-      min-height: 520px;
-      z-index: 4;
+      min-height: 560px;
+      z-index: 5;
     }
 
     /* Background stage */
@@ -294,33 +294,40 @@
         radial-gradient(circle, rgba(255,79,216,0.30) 0%, rgba(57,213,255,0.18) 38%, rgba(0,0,0,0) 72%);
       filter: blur(28px);
       opacity: 0.95;
+      z-index: 1;
     }
 
     .hero-horizon {
       position: absolute;
-      left: 50%;
+      left: 0;
+      right: 0;
       top: 31%;
-      transform: translateX(-50%);
-      width: min(76vw, 1040px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,79,216,0.9), rgba(57,213,255,0.92), transparent);
+      background: linear-gradient(
+        90deg,
+        rgba(255,79,216,0) 0%,
+        rgba(255,79,216,0.85) 18%,
+        rgba(57,213,255,0.95) 50%,
+        rgba(255,79,216,0.85) 82%,
+        rgba(255,79,216,0) 100%
+      );
       box-shadow: var(--glow-pink), var(--glow-cyan);
       opacity: 1;
-      z-index: 2;
+      z-index: 3;
     }
 
     .perspective-grid-wrap {
       position: absolute;
       left: 50%;
-      top: 31%;
+      top: calc(31% + 1px);
       width: 190vw;
       max-width: 2400px;
       height: 980px;
       transform: translateX(-50%) perspective(1500px) rotateX(79deg);
       transform-origin: center top;
-      z-index: 1;
-      opacity: 0.42;
-      filter: blur(0.6px);
+      z-index: 2;
+      opacity: 0.32;
+      filter: blur(1.15px);
     }
 
     .grid-vertical,
@@ -335,10 +342,10 @@
         repeating-linear-gradient(
           to right,
           transparent 0px 88px,
-          rgba(57,213,255,0.82) 88px 90px,
+          rgba(57,213,255,0.72) 88px 90px,
           transparent 90px 176px
         );
-      filter: drop-shadow(0 0 4px rgba(57,213,255,0.45));
+      filter: drop-shadow(0 0 3px rgba(57,213,255,0.42));
     }
 
     .grid-horizontal {
@@ -346,20 +353,16 @@
         repeating-linear-gradient(
           to bottom,
           transparent 0px 46px,
-          rgba(255,79,216,0.56) 46px 48px,
+          rgba(255,79,216,0.48) 46px 48px,
           transparent 48px 94px
         );
-      filter: drop-shadow(0 0 4px rgba(255,79,216,0.28));
+      filter: drop-shadow(0 0 3px rgba(255,79,216,0.24));
       animation: forwardMotion 4.5s linear infinite;
     }
 
     @keyframes forwardMotion {
-      from {
-        background-position: 0 0;
-      }
-      to {
-        background-position: 0 94px;
-      }
+      from { background-position: 0 0; }
+      to   { background-position: 0 94px; }
     }
 
     .grid-fade {
@@ -373,43 +376,39 @@
           rgba(9,3,17,0.10) 72%,
           rgba(4,2,8,0.58) 100%
         );
-      z-index: 2;
+      z-index: 4;
     }
 
-    /* Hero case study carousel */
+    /* Hero card conveyor */
 
-    .hero-cards {
-      position: absolute;
-      right: 10px;
-      top: 18px;
-      width: min(430px, 100%);
-      height: 500px;
-      pointer-events: none;
-    }
-
-    .hero-card-link {
+    .hero-card-track {
       position: absolute;
       inset: 0;
-      display: grid;
-      grid-template-rows: 220px 1fr;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .travel-card {
+      position: absolute;
+      left: 50%;
+      top: 31%;
+      width: min(430px, 90%);
+      transform-origin: center center;
       border-radius: var(--radius-xl);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(18, 12, 34, 0.72);
+      background: rgba(18, 12, 34, 0.74);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
-      opacity: 0;
-      transform: translateY(12px) scale(0.985);
-      animation: heroCardCycle 15s infinite;
       pointer-events: auto;
+      cursor: pointer;
       transition:
-        transform var(--transition),
         border-color var(--transition),
         box-shadow var(--transition);
+      animation: travelCard 12s linear infinite;
     }
 
-    .hero-card-link:hover {
-      transform: translateY(-4px) scale(1.01);
+    .travel-card:hover {
       border-color: rgba(57,213,255,0.34);
       box-shadow:
         0 24px 70px rgba(0,0,0,0.42),
@@ -417,28 +416,56 @@
         0 0 28px rgba(255,79,216,0.14);
     }
 
-    .hero-card-link.card-1 { animation-delay: 0s; }
-    .hero-card-link.card-2 { animation-delay: 5s; }
-    .hero-card-link.card-3 { animation-delay: 10s; }
+    .travel-card.card-1 { animation-delay: 0s; }
+    .travel-card.card-2 { animation-delay: -4s; }
+    .travel-card.card-3 { animation-delay: -8s; }
 
-    @keyframes heroCardCycle {
-      0%   { opacity: 0; transform: translateY(16px) scale(0.985); }
-      5%   { opacity: 1; transform: translateY(0) scale(1); }
-      28%  { opacity: 1; transform: translateY(0) scale(1); }
-      33%  { opacity: 0; transform: translateY(-10px) scale(1.01); }
-      100% { opacity: 0; transform: translateY(-10px) scale(1.01); }
+    @keyframes travelCard {
+      0% {
+        transform: translate(-50%, 8px) scale(0.12);
+        opacity: 0;
+      }
+      8% {
+        transform: translate(-50%, 22px) scale(0.18);
+        opacity: 0.22;
+      }
+      22% {
+        transform: translate(-50%, 56px) scale(0.34);
+        opacity: 0.5;
+      }
+      42% {
+        transform: translate(-50%, 118px) scale(0.58);
+        opacity: 0.78;
+      }
+      66% {
+        transform: translate(-50%, 214px) scale(0.84);
+        opacity: 0.96;
+      }
+      84% {
+        transform: translate(-50%, 316px) scale(1);
+        opacity: 1;
+      }
+      92% {
+        transform: translate(-50%, 350px) scale(1.06);
+        opacity: 0.35;
+      }
+      100% {
+        transform: translate(-50%, 368px) scale(1.1);
+        opacity: 0;
+      }
     }
 
-    .hero-card-media {
+    .travel-card-media {
       position: relative;
       overflow: hidden;
+      height: 180px;
       background:
         radial-gradient(circle at 30% 20%, rgba(255,79,216,0.14), transparent 20%),
         linear-gradient(180deg, rgba(57,213,255,0.08), rgba(255,79,216,0.06)),
         #12091f;
     }
 
-    .hero-card-media::before {
+    .travel-card-media::before {
       content: "";
       position: absolute;
       left: 50%;
@@ -453,89 +480,91 @@
       opacity: 0.66;
     }
 
-    .hero-card-lines {
+    .travel-card-lines {
       position: absolute;
-      inset: 20px;
+      inset: 16px;
       display: grid;
-      gap: 10px;
+      gap: 8px;
       align-content: start;
       z-index: 2;
     }
 
-    .hero-card-lines span {
+    .travel-card-lines span {
       display: block;
-      height: 10px;
+      height: 9px;
       border-radius: 999px;
       background: rgba(255,255,255,0.10);
     }
 
-    .hero-card-lines span:nth-child(1) { width: 26%; background: linear-gradient(90deg, var(--pink), var(--cyan)); }
-    .hero-card-lines span:nth-child(2) { width: 58%; height: 18px; background: rgba(255,255,255,0.18); }
-    .hero-card-lines span:nth-child(3) { width: 100%; }
-    .hero-card-lines span:nth-child(4) { width: 82%; }
-    .hero-card-lines span:nth-child(5) { width: 64%; }
+    .travel-card-lines span:nth-child(1) { width: 26%; background: linear-gradient(90deg, var(--pink), var(--cyan)); }
+    .travel-card-lines span:nth-child(2) { width: 58%; height: 16px; background: rgba(255,255,255,0.18); }
+    .travel-card-lines span:nth-child(3) { width: 100%; }
+    .travel-card-lines span:nth-child(4) { width: 82%; }
+    .travel-card-lines span:nth-child(5) { width: 64%; }
 
-    .hero-card-thumbs {
+    .travel-card-thumbs {
       position: absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 8px;
       z-index: 2;
     }
 
-    .hero-card-thumbs div {
+    .travel-card-thumbs div {
       aspect-ratio: 1.15 / 0.82;
-      border-radius: 14px;
+      border-radius: 12px;
       background:
         linear-gradient(180deg, rgba(57,213,255,0.12), rgba(255,79,216,0.08)),
         rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .hero-card-body {
-      padding: 22px;
+    .travel-card-body {
+      padding: 18px;
       display: grid;
-      align-content: start;
-      gap: 10px;
+      gap: 8px;
+      background: rgba(18, 12, 34, 0.86);
     }
 
-    .hero-card-body h3 {
+    .travel-card-body h3 {
       margin: 0;
-      font-size: 28px;
+      font-size: 24px;
       line-height: 1.02;
       letter-spacing: -0.03em;
     }
 
-    .hero-card-body p {
+    .travel-card-body p {
       margin: 0;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
+      line-height: 1.35;
     }
 
-    .hero-card-meta {
+    .travel-card-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 2px;
     }
 
-    .hero-pill {
-      padding: 7px 10px;
+    .travel-pill {
+      padding: 6px 9px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       color: #e2daf6;
-      font-size: 13px;
+      font-size: 12px;
     }
 
-    .hero-card-cta {
+    .travel-cta {
       margin-top: 2px;
       color: #fff;
       font-family: "Chakra Petch", sans-serif;
       text-shadow: var(--glow-cyan);
+      font-size: 14px;
     }
 
     /* Rest of page */
@@ -803,21 +832,15 @@
       }
 
       .hero {
-        min-height: 980px;
+        min-height: 1080px;
       }
 
       .hero-right {
-        min-height: 420px;
+        min-height: 500px;
       }
 
-      .hero-cards {
-        position: relative;
-        right: auto;
-        top: auto;
-        width: 100%;
-        max-width: 480px;
-        height: 460px;
-        margin-left: auto;
+      .travel-card {
+        width: min(440px, 86vw);
       }
     }
 
@@ -833,7 +856,7 @@
 
       .hero {
         padding-top: 46px;
-        min-height: 980px;
+        min-height: 1040px;
       }
 
       .hero-actions {
@@ -847,34 +870,33 @@
 
       .hero-horizon {
         top: 35%;
-        width: 88vw;
       }
 
       .perspective-grid-wrap {
-        top: 35%;
+        top: calc(35% + 1px);
         width: 250vw;
         height: 760px;
         transform: translateX(-50%) perspective(1100px) rotateX(80deg);
-        opacity: 0.34;
+        opacity: 0.26;
       }
 
       .hero-right {
-        min-height: 420px;
+        min-height: 450px;
       }
 
-      .hero-cards {
-        height: 420px;
+      .travel-card {
+        width: min(390px, 88vw);
       }
 
-      .hero-card-link {
-        grid-template-rows: 180px 1fr;
+      .travel-card-media {
+        height: 160px;
       }
 
-      .hero-card-body h3 {
-        font-size: 24px;
+      .travel-card-body h3 {
+        font-size: 22px;
       }
 
-      .hero-card-thumbs,
+      .travel-card-thumbs,
       .project-mini-cards {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -926,68 +948,68 @@
         </div>
 
         <div class="hero-right">
-          <div class="hero-cards">
-            <a class="hero-card-link card-1" href="#work">
-              <div class="hero-card-media">
-                <div class="hero-card-lines">
+          <div class="hero-card-track">
+            <a class="travel-card card-1" href="#work">
+              <div class="travel-card-media">
+                <div class="travel-card-lines">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <div class="hero-card-thumbs">
+                <div class="travel-card-thumbs">
                   <div></div><div></div><div></div>
                 </div>
               </div>
-              <div class="hero-card-body">
+              <div class="travel-card-body">
                 <p class="project-type">Journey optimisation</p>
                 <h3>Energy renewal journey redesign</h3>
                 <p>Reducing friction and improving clarity in a commercially sensitive renewal flow.</p>
-                <div class="hero-card-meta">
-                  <span class="hero-pill">Lead UX</span>
-                  <span class="hero-pill">Research</span>
-                  <span class="hero-pill">Service design</span>
+                <div class="travel-card-meta">
+                  <span class="travel-pill">Lead UX</span>
+                  <span class="travel-pill">Research</span>
+                  <span class="travel-pill">Service design</span>
                 </div>
-                <div class="hero-card-cta">View case study →</div>
+                <div class="travel-cta">View case study →</div>
               </div>
             </a>
 
-            <a class="hero-card-link card-2" href="#work">
-              <div class="hero-card-media">
-                <div class="hero-card-lines">
+            <a class="travel-card card-2" href="#work">
+              <div class="travel-card-media">
+                <div class="travel-card-lines">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <div class="hero-card-thumbs">
+                <div class="travel-card-thumbs">
                   <div></div><div></div><div></div>
                 </div>
               </div>
-              <div class="hero-card-body">
+              <div class="travel-card-body">
                 <p class="project-type">Service design</p>
                 <h3>Insurance journey deconstruction</h3>
                 <p>Untangling complex logic and information architecture into a clearer scalable structure.</p>
-                <div class="hero-card-meta">
-                  <span class="hero-pill">IA</span>
-                  <span class="hero-pill">Mapping</span>
+                <div class="travel-card-meta">
+                  <span class="travel-pill">IA</span>
+                  <span class="travel-pill">Mapping</span>
                 </div>
-                <div class="hero-card-cta">View case study →</div>
+                <div class="travel-cta">View case study →</div>
               </div>
             </a>
 
-            <a class="hero-card-link card-3" href="#work">
-              <div class="hero-card-media">
-                <div class="hero-card-lines">
+            <a class="travel-card card-3" href="#work">
+              <div class="travel-card-media">
+                <div class="travel-card-lines">
                   <span></span><span></span><span></span><span></span><span></span>
                 </div>
-                <div class="hero-card-thumbs">
+                <div class="travel-card-thumbs">
                   <div></div><div></div><div></div>
                 </div>
               </div>
-              <div class="hero-card-body">
+              <div class="travel-card-body">
                 <p class="project-type">Research & experimentation</p>
                 <h3>Evidence-led UX optimisation</h3>
                 <p>Using testing and behavioural evidence to drive measurable product improvements.</p>
-                <div class="hero-card-meta">
-                  <span class="hero-pill">Testing</span>
-                  <span class="hero-pill">Experiments</span>
+                <div class="travel-card-meta">
+                  <span class="travel-pill">Testing</span>
+                  <span class="travel-pill">Experiments</span>
                 </div>
-                <div class="hero-card-cta">View case study →</div>
+                <div class="travel-cta">View case study →</div>
               </div>
             </a>
           </div>
