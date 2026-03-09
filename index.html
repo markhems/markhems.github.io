@@ -13,8 +13,8 @@
       --muted: #c7bddf;
       --pink: #ff4fd8;
       --cyan: #39d5ff;
-      --panel: rgba(16, 10, 29, 0.82);
-      --panel-strong: rgba(22, 14, 40, 0.88);
+      --panel: rgba(16, 10, 29, 0.84);
+      --panel-strong: rgba(22, 14, 40, 0.90);
       --line: rgba(255, 255, 255, 0.10);
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
       --radius-xl: 30px;
@@ -29,10 +29,8 @@
         0 0 10px rgba(57, 213, 255, 0.8),
         0 0 24px rgba(57, 213, 255, 0.55),
         0 0 48px rgba(57, 213, 255, 0.28);
-      --glow-mixed:
-        0 0 12px rgba(255, 79, 216, 0.7),
-        0 0 22px rgba(57, 213, 255, 0.65),
-        0 0 44px rgba(155, 92, 255, 0.3);
+      --grid-step: 120px;
+      --queue-duration: 18s;
     }
 
     * { box-sizing: border-box; }
@@ -119,20 +117,20 @@
 
     .nav-links a:hover {
       color: #fff;
-      text-shadow: var(--glow-mixed);
+      text-shadow: 0 0 12px rgba(255, 79, 216, 0.7), 0 0 22px rgba(57, 213, 255, 0.65);
       transform: translateY(-1px);
     }
 
     .hero {
       position: relative;
-      padding: 48px 0 72px;
+      padding: 42px 0 72px;
       overflow: hidden;
-      min-height: 1150px;
+      min-height: 1500px;
     }
 
     .hero-grid {
       position: relative;
-      z-index: 4;
+      z-index: 6;
       display: grid;
       grid-template-columns: minmax(0, 520px) 1fr;
       gap: 48px;
@@ -165,6 +163,12 @@
       text-shadow:
         0 0 18px rgba(255, 79, 216, 0.16),
         0 0 36px rgba(57, 213, 255, 0.10);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 7;
+      margin-top: 0;
     }
 
     .hero-tagline {
@@ -208,25 +212,9 @@
       border-color: transparent;
     }
 
-    .btn-primary:hover {
-      box-shadow:
-        0 0 18px rgba(255,79,216,0.85),
-        0 0 32px rgba(57,213,255,0.75),
-        0 12px 34px rgba(255,79,216,0.34),
-        0 10px 28px rgba(57,213,255,0.24);
-    }
-
     .btn-secondary {
       background: rgba(255,255,255,0.04);
       color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      box-shadow:
-        0 0 12px rgba(57,213,255,0.7),
-        0 0 26px rgba(57,213,255,0.45),
-        0 0 42px rgba(255,79,216,0.18);
-      border-color: rgba(57,213,255,0.42);
     }
 
     .hero-meta {
@@ -246,16 +234,8 @@
       backdrop-filter: blur(10px);
     }
 
-    .hero-copy {
-      position: relative;
-      z-index: 5;
-      margin-top: -8px;
-    }
-
     .hero-right {
-      position: relative;
-      min-height: 980px;
-      z-index: 5;
+      min-height: 1px;
     }
 
     .hero-stage {
@@ -284,7 +264,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      top: 27%;
+      top: 22%;
       height: 2px;
       background: linear-gradient(
         90deg,
@@ -301,15 +281,15 @@
     .perspective-grid-wrap {
       position: absolute;
       left: 50%;
-      top: calc(27% + 1px);
+      top: calc(22% + 1px);
       width: 190vw;
       max-width: 2400px;
-      height: 980px;
+      height: 1200px;
       transform: translateX(-50%) perspective(1500px) rotateX(79deg);
       transform-origin: center top;
       z-index: 2;
-      opacity: 0.28;
-      filter: blur(1.25px);
+      opacity: 0.26;
+      filter: blur(1.1px);
     }
 
     .grid-vertical,
@@ -334,17 +314,17 @@
       background:
         repeating-linear-gradient(
           to bottom,
-          transparent 0px 46px,
-          rgba(255,79,216,0.48) 46px 48px,
-          transparent 48px 94px
+          transparent 0px calc(var(--grid-step) - 2px),
+          rgba(255,79,216,0.52) calc(var(--grid-step) - 2px) var(--grid-step),
+          transparent var(--grid-step) calc(var(--grid-step) * 2)
         );
       filter: drop-shadow(0 0 3px rgba(255,79,216,0.24));
-      animation: forwardMotion 4.5s linear infinite;
+      animation: gridFlow 3s linear infinite;
     }
 
-    @keyframes forwardMotion {
+    @keyframes gridFlow {
       from { background-position: 0 0; }
-      to { background-position: 0 94px; }
+      to { background-position: 0 var(--grid-step); }
     }
 
     .grid-fade {
@@ -354,20 +334,20 @@
         linear-gradient(
           to bottom,
           rgba(9,3,17,0.02) 0%,
-          rgba(9,3,17,0.00) 22%,
+          rgba(9,3,17,0.00) 18%,
           rgba(9,3,17,0.10) 72%,
-          rgba(4,2,8,0.58) 100%
+          rgba(4,2,8,0.62) 100%
         );
       z-index: 4;
     }
 
-    /* Completely redone queue */
+    /* Queue centred on page, synced to six horizontal lines */
     .hero-card-track {
       position: absolute;
       left: 50%;
-      top: 20px;
-      width: 100%;
-      height: 920px;
+      top: calc(22% + 8px);
+      width: min(920px, 92vw);
+      height: 980px;
       transform: translateX(-50%);
       pointer-events: none;
       z-index: 5;
@@ -378,17 +358,17 @@
       left: 50%;
       top: 0;
       width: min(430px, 90%);
-      transform-origin: center center;
+      transform-origin: center bottom;
       border-radius: var(--radius-xl);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(18, 12, 34, 0.90);
+      background: rgba(18, 12, 34, 0.92);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
       pointer-events: auto;
       cursor: pointer;
       transition: border-color var(--transition), box-shadow var(--transition);
-      animation: queueCard 20s linear infinite;
+      animation: queueCard var(--queue-duration) linear infinite;
     }
 
     .travel-card:hover {
@@ -400,42 +380,43 @@
     }
 
     .travel-card.card-1 { animation-delay: 0s; }
-    .travel-card.card-2 { animation-delay: -4s; }
-    .travel-card.card-3 { animation-delay: -8s; }
-    .travel-card.card-4 { animation-delay: -12s; }
-    .travel-card.card-5 { animation-delay: -16s; }
+    .travel-card.card-2 { animation-delay: -3s; }
+    .travel-card.card-3 { animation-delay: -6s; }
+    .travel-card.card-4 { animation-delay: -9s; }
+    .travel-card.card-5 { animation-delay: -12s; }
+    .travel-card.card-6 { animation-delay: -15s; }
 
     @keyframes queueCard {
       0% {
         transform: translate(-50%, 0px) rotateX(60deg) scale(0.08);
         opacity: 1;
       }
-      15% {
-        transform: translate(-50%, 40px) rotateX(56deg) scale(0.16);
+      16.666% {
+        transform: translate(-50%, 120px) rotateX(54deg) scale(0.16);
         opacity: 1;
       }
-      30% {
-        transform: translate(-50%, 140px) rotateX(48deg) scale(0.30);
+      33.333% {
+        transform: translate(-50%, 240px) rotateX(46deg) scale(0.28);
         opacity: 1;
       }
       50% {
-        transform: translate(-50%, 300px) rotateX(34deg) scale(0.52);
+        transform: translate(-50%, 360px) rotateX(34deg) scale(0.44);
         opacity: 1;
       }
-      70% {
-        transform: translate(-50%, 520px) rotateX(18deg) scale(0.78);
+      66.666% {
+        transform: translate(-50%, 480px) rotateX(20deg) scale(0.64);
         opacity: 1;
       }
-      85% {
-        transform: translate(-50%, 700px) rotateX(8deg) scale(0.96);
+      83.333% {
+        transform: translate(-50%, 600px) rotateX(10deg) scale(0.86);
         opacity: 1;
       }
       94% {
-        transform: translate(-50%, 800px) rotateX(2deg) scale(1.06);
+        transform: translate(-50%, 720px) rotateX(3deg) scale(1.02);
         opacity: 1;
       }
       98% {
-        transform: translate(-50%, 820px) rotateX(0deg) scale(1.10);
+        transform: translate(-50%, 760px) rotateX(0deg) scale(1.08);
         opacity: 0;
       }
       100% {
@@ -445,8 +426,6 @@
     }
 
     .travel-card-media {
-      position: relative;
-      overflow: hidden;
       height: 150px;
       background-color: #12091f;
       background-size: cover;
@@ -454,80 +433,11 @@
       background-repeat: no-repeat;
     }
 
-    .travel-card-media::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(9,6,20,0.18), rgba(9,6,20,0.62)),
-        radial-gradient(circle at 20% 20%, rgba(255,79,216,0.18), transparent 22%),
-        radial-gradient(circle at 80% 24%, rgba(57,213,255,0.14), transparent 20%);
-      z-index: 1;
-    }
-
-    .travel-card-media::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -8%;
-      transform: translateX(-50%) perspective(800px) rotateX(76deg);
-      width: 145%;
-      height: 72%;
-      background:
-        linear-gradient(to bottom, rgba(255,79,216,0.10), rgba(57,213,255,0.05) 24%, transparent 60%),
-        repeating-linear-gradient(to right, rgba(57,213,255,0.22) 0 2px, transparent 2px 46px),
-        repeating-linear-gradient(to top, rgba(255,79,216,0.16) 0 2px, transparent 2px 46px);
-      opacity: 0.66;
-      z-index: 2;
-    }
-
-    .travel-card-lines {
-      position: absolute;
-      inset: 16px;
-      display: grid;
-      gap: 8px;
-      align-content: start;
-      z-index: 3;
-    }
-
-    .travel-card-lines span {
-      display: block;
-      height: 9px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-    }
-
-    .travel-card-lines span:nth-child(1) { width: 26%; background: linear-gradient(90deg, var(--pink), var(--cyan)); }
-    .travel-card-lines span:nth-child(2) { width: 58%; height: 16px; background: rgba(255,255,255,0.18); }
-    .travel-card-lines span:nth-child(3) { width: 100%; }
-    .travel-card-lines span:nth-child(4) { width: 82%; }
-    .travel-card-lines span:nth-child(5) { width: 64%; }
-
-    .travel-card-thumbs {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      z-index: 3;
-    }
-
-    .travel-card-thumbs div {
-      aspect-ratio: 1.15 / 0.82;
-      border-radius: 12px;
-      background:
-        linear-gradient(180deg, rgba(57,213,255,0.12), rgba(255,79,216,0.08)),
-        rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
     .travel-card-body {
       padding: 18px;
       display: grid;
       gap: 8px;
-      background: rgba(18, 12, 34, 0.86);
+      background: rgba(18, 12, 34, 0.94);
     }
 
     .travel-card-body h3 {
@@ -598,10 +508,7 @@
       gap: 24px;
     }
 
-    .project-stack {
-      display: grid;
-      gap: 24px;
-    }
+    .project-stack { display: grid; gap: 24px; }
 
     .project-card {
       border: 1px solid rgba(255,255,255,0.10);
@@ -735,10 +642,7 @@
       max-width: 60ch;
     }
 
-    .stat-stack {
-      display: grid;
-      gap: 16px;
-    }
+    .stat-stack { display: grid; gap: 16px; }
 
     .stat-card {
       padding: 24px;
@@ -814,20 +718,12 @@
       }
 
       .hero {
-        min-height: 1280px;
-      }
-
-      .hero-right {
-        min-height: 860px;
+        min-height: 1600px;
       }
 
       .hero-card-track {
-        top: 10px;
-        height: 820px;
-      }
-
-      .travel-card {
-        width: min(440px, 86vw);
+        width: min(760px, 94vw);
+        height: 900px;
       }
     }
 
@@ -841,7 +737,7 @@
 
       .hero {
         padding-top: 40px;
-        min-height: 1160px;
+        min-height: 1420px;
       }
 
       .hero-actions {
@@ -851,23 +747,20 @@
 
       .hero-grid { gap: 28px; }
 
-      .hero-horizon { top: 32%; }
+      .hero-horizon { top: 26%; }
 
       .perspective-grid-wrap {
-        top: calc(32% + 1px);
+        top: calc(26% + 1px);
         width: 250vw;
-        height: 760px;
+        height: 860px;
         transform: translateX(-50%) perspective(1100px) rotateX(80deg);
-        opacity: 0.26;
-      }
-
-      .hero-right {
-        min-height: 760px;
+        opacity: 0.24;
       }
 
       .hero-card-track {
-        top: 0;
-        height: 720px;
+        top: calc(26% + 8px);
+        width: 94vw;
+        height: 820px;
       }
 
       .travel-card {
@@ -882,7 +775,6 @@
         font-size: 22px;
       }
 
-      .travel-card-thumbs,
       .project-mini-cards {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -911,6 +803,93 @@
           <div class="grid-horizontal"></div>
         </div>
         <div class="grid-fade"></div>
+
+        <div class="hero-card-track">
+          <a class="travel-card card-1" href="#work">
+            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Journey optimisation</p>
+              <h3>Energy renewal journey redesign</h3>
+              <p>Reducing friction and improving clarity in a commercially sensitive renewal flow.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Lead UX</span>
+                <span class="travel-pill">Research</span>
+                <span class="travel-pill">Service design</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
+
+          <a class="travel-card card-2" href="#work">
+            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Service design</p>
+              <h3>Insurance journey deconstruction</h3>
+              <p>Untangling complex logic and information architecture into a clearer scalable structure.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">IA</span>
+                <span class="travel-pill">Mapping</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
+
+          <a class="travel-card card-3" href="#work">
+            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Research & experimentation</p>
+              <h3>Evidence-led UX optimisation</h3>
+              <p>Using testing and behavioural evidence to drive measurable product improvements.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Testing</span>
+                <span class="travel-pill">Experiments</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
+
+          <a class="travel-card card-4" href="#work">
+            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Operational complexity</p>
+              <h3>Designing across user and agent workflows</h3>
+              <p>Aligning customer-facing journeys with agent tooling and service dependencies.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Systems</span>
+                <span class="travel-pill">Workflow</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
+
+          <a class="travel-card card-5" href="#work">
+            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Strategy & clarity</p>
+              <h3>Turning complexity into guided decision-making</h3>
+              <p>Designing flows that help users understand, choose, and progress with confidence.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Strategy</span>
+                <span class="travel-pill">UX</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
+
+          <a class="travel-card card-6" href="#work">
+            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-body">
+              <p class="project-type">Product clarity</p>
+              <h3>Simplifying high-complexity decision flows</h3>
+              <p>Creating guided pathways that reduce ambiguity and improve confidence.</p>
+              <div class="travel-card-meta">
+                <span class="travel-pill">Product UX</span>
+                <span class="travel-pill">Clarity</span>
+              </div>
+              <div class="travel-cta">View case study →</div>
+            </div>
+          </a>
+        </div>
       </div>
 
       <div class="container hero-grid">
@@ -933,115 +912,7 @@
           </div>
         </div>
 
-        <div class="hero-right">
-          <div class="hero-card-track">
-            <a class="travel-card card-1" href="#work">
-              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');">
-                <div class="travel-card-lines">
-                  <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="travel-card-thumbs">
-                  <div></div><div></div><div></div>
-                </div>
-              </div>
-              <div class="travel-card-body">
-                <p class="project-type">Journey optimisation</p>
-                <h3>Energy renewal journey redesign</h3>
-                <p>Reducing friction and improving clarity in a commercially sensitive renewal flow.</p>
-                <div class="travel-card-meta">
-                  <span class="travel-pill">Lead UX</span>
-                  <span class="travel-pill">Research</span>
-                  <span class="travel-pill">Service design</span>
-                </div>
-                <div class="travel-cta">View case study →</div>
-              </div>
-            </a>
-
-            <a class="travel-card card-2" href="#work">
-              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1200&q=80');">
-                <div class="travel-card-lines">
-                  <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="travel-card-thumbs">
-                  <div></div><div></div><div></div>
-                </div>
-              </div>
-              <div class="travel-card-body">
-                <p class="project-type">Service design</p>
-                <h3>Insurance journey deconstruction</h3>
-                <p>Untangling complex logic and information architecture into a clearer scalable structure.</p>
-                <div class="travel-card-meta">
-                  <span class="travel-pill">IA</span>
-                  <span class="travel-pill">Mapping</span>
-                </div>
-                <div class="travel-cta">View case study →</div>
-              </div>
-            </a>
-
-            <a class="travel-card card-3" href="#work">
-              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80');">
-                <div class="travel-card-lines">
-                  <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="travel-card-thumbs">
-                  <div></div><div></div><div></div>
-                </div>
-              </div>
-              <div class="travel-card-body">
-                <p class="project-type">Research & experimentation</p>
-                <h3>Evidence-led UX optimisation</h3>
-                <p>Using testing and behavioural evidence to drive measurable product improvements.</p>
-                <div class="travel-card-meta">
-                  <span class="travel-pill">Testing</span>
-                  <span class="travel-pill">Experiments</span>
-                </div>
-                <div class="travel-cta">View case study →</div>
-              </div>
-            </a>
-
-            <a class="travel-card card-4" href="#work">
-              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80');">
-                <div class="travel-card-lines">
-                  <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="travel-card-thumbs">
-                  <div></div><div></div><div></div>
-                </div>
-              </div>
-              <div class="travel-card-body">
-                <p class="project-type">Operational complexity</p>
-                <h3>Designing across user and agent workflows</h3>
-                <p>Aligning customer-facing journeys with agent tooling and service dependencies.</p>
-                <div class="travel-card-meta">
-                  <span class="travel-pill">Systems</span>
-                  <span class="travel-pill">Workflow</span>
-                </div>
-                <div class="travel-cta">View case study →</div>
-              </div>
-            </a>
-
-            <a class="travel-card card-5" href="#work">
-              <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');">
-                <div class="travel-card-lines">
-                  <span></span><span></span><span></span><span></span><span></span>
-                </div>
-                <div class="travel-card-thumbs">
-                  <div></div><div></div><div></div>
-                </div>
-              </div>
-              <div class="travel-card-body">
-                <p class="project-type">Strategy & clarity</p>
-                <h3>Turning complexity into guided decision-making</h3>
-                <p>Designing flows that help users understand, choose, and progress with confidence.</p>
-                <div class="travel-card-meta">
-                  <span class="travel-pill">Strategy</span>
-                  <span class="travel-pill">UX</span>
-                </div>
-                <div class="travel-cta">View case study →</div>
-              </div>
-            </a>
-          </div>
-        </div>
+        <div class="hero-right"></div>
       </div>
     </section>
 
