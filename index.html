@@ -13,11 +13,10 @@
       --muted: #c7bddf;
       --pink: #ff4fd8;
       --cyan: #39d5ff;
-      --panel: rgba(16, 10, 29, 0.84);
+      --panel: rgba(16, 10, 29, 0.88);
       --panel-strong: rgba(22, 14, 40, 0.90);
-      --line: rgba(255, 255, 255, 0.10);
       --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
-      --radius-xl: 30px;
+      --radius-xl: 28px;
       --radius-lg: 22px;
       --max-width: 1220px;
       --transition: 260ms cubic-bezier(.2,.8,.2,1);
@@ -29,8 +28,6 @@
         0 0 10px rgba(57, 213, 255, 0.8),
         0 0 24px rgba(57, 213, 255, 0.55),
         0 0 48px rgba(57, 213, 255, 0.28);
-      --grid-step: 120px;
-      --queue-duration: 18s;
     }
 
     * { box-sizing: border-box; }
@@ -48,18 +45,6 @@
       line-height: 1.5;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 50% 10%, rgba(255,255,255,0.08), transparent 10%),
-        radial-gradient(circle at 70% 22%, rgba(57,213,255,0.08), transparent 12%),
-        radial-gradient(circle at 35% 24%, rgba(255,79,216,0.06), transparent 12%);
-      z-index: 0;
     }
 
     a {
@@ -123,9 +108,9 @@
 
     .hero {
       position: relative;
-      padding: 42px 0 72px;
+      padding: 56px 0 72px;
       overflow: hidden;
-      min-height: 1500px;
+      min-height: 1200px;
     }
 
     .hero-grid {
@@ -168,12 +153,11 @@
     .hero-copy {
       position: relative;
       z-index: 7;
-      margin-top: 0;
     }
 
     .hero-tagline {
       margin: 14px 0 0;
-      max-width: 26ch;
+      max-width: 24ch;
       font-size: clamp(16px, 1.35vw, 20px);
       line-height: 1.35;
       color: #e6def8;
@@ -201,9 +185,7 @@
       letter-spacing: 0.01em;
     }
 
-    .btn:hover {
-      transform: translateY(-2px) scale(1.02);
-    }
+    .btn:hover { transform: translateY(-2px) scale(1.02); }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--pink), var(--cyan));
@@ -235,7 +217,7 @@
     }
 
     .hero-right {
-      min-height: 1px;
+      min-height: 900px;
     }
 
     .hero-stage {
@@ -249,12 +231,12 @@
     .hero-glow {
       position: absolute;
       left: 50%;
-      top: 8%;
+      top: 10%;
       transform: translateX(-50%);
       width: 620px;
       height: 220px;
       background:
-        radial-gradient(circle, rgba(255,79,216,0.30) 0%, rgba(57,213,255,0.18) 38%, rgba(0,0,0,0) 72%);
+        radial-gradient(circle, rgba(255,79,216,0.28) 0%, rgba(57,213,255,0.18) 38%, rgba(0,0,0,0) 72%);
       filter: blur(28px);
       opacity: 0.95;
       z-index: 1;
@@ -264,7 +246,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      top: 22%;
+      top: 250px;
       height: 2px;
       background: linear-gradient(
         90deg,
@@ -281,15 +263,15 @@
     .perspective-grid-wrap {
       position: absolute;
       left: 50%;
-      top: calc(22% + 1px);
+      top: 252px;
       width: 190vw;
       max-width: 2400px;
-      height: 1200px;
+      height: 980px;
       transform: translateX(-50%) perspective(1500px) rotateX(79deg);
       transform-origin: center top;
       z-index: 2;
-      opacity: 0.26;
-      filter: blur(1.1px);
+      opacity: 0.24;
+      filter: blur(1px);
     }
 
     .grid-vertical,
@@ -314,9 +296,9 @@
       background:
         repeating-linear-gradient(
           to bottom,
-          transparent 0px calc(var(--grid-step) - 2px),
-          rgba(255,79,216,0.52) calc(var(--grid-step) - 2px) var(--grid-step),
-          transparent var(--grid-step) calc(var(--grid-step) * 2)
+          transparent 0px 98px,
+          rgba(255,79,216,0.50) 98px 100px,
+          transparent 100px 200px
         );
       filter: drop-shadow(0 0 3px rgba(255,79,216,0.24));
       animation: gridFlow 3s linear infinite;
@@ -324,7 +306,7 @@
 
     @keyframes gridFlow {
       from { background-position: 0 0; }
-      to { background-position: 0 var(--grid-step); }
+      to { background-position: 0 100px; }
     }
 
     .grid-fade {
@@ -333,7 +315,7 @@
       background:
         linear-gradient(
           to bottom,
-          rgba(9,3,17,0.02) 0%,
+          rgba(9,3,17,0.00) 0%,
           rgba(9,3,17,0.00) 18%,
           rgba(9,3,17,0.10) 72%,
           rgba(4,2,8,0.62) 100%
@@ -341,13 +323,13 @@
       z-index: 4;
     }
 
-    /* Queue centred on page, synced to six horizontal lines */
+    /* New queue from scratch */
     .hero-card-track {
       position: absolute;
       left: 50%;
-      top: calc(22% + 8px);
-      width: min(920px, 92vw);
-      height: 980px;
+      top: 250px;
+      width: min(900px, 92vw);
+      height: 900px;
       transform: translateX(-50%);
       pointer-events: none;
       z-index: 5;
@@ -356,19 +338,19 @@
     .travel-card {
       position: absolute;
       left: 50%;
-      top: 0;
+      bottom: 0;
       width: min(430px, 90%);
       transform-origin: center bottom;
       border-radius: var(--radius-xl);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(18, 12, 34, 0.92);
+      background: rgba(18, 12, 34, 0.94);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
       pointer-events: auto;
       cursor: pointer;
       transition: border-color var(--transition), box-shadow var(--transition);
-      animation: queueCard var(--queue-duration) linear infinite;
+      animation: cardQueue 15s linear infinite;
     }
 
     .travel-card:hover {
@@ -379,65 +361,58 @@
         0 0 28px rgba(255,79,216,0.14);
     }
 
-    .travel-card.card-1 { animation-delay: 0s; }
-    .travel-card.card-2 { animation-delay: -3s; }
-    .travel-card.card-3 { animation-delay: -6s; }
-    .travel-card.card-4 { animation-delay: -9s; }
-    .travel-card.card-5 { animation-delay: -12s; }
-    .travel-card.card-6 { animation-delay: -15s; }
+    /* front card always above back card */
+    .travel-card.card-1 { animation-delay: 0s; z-index: 6; }
+    .travel-card.card-2 { animation-delay: -3s; z-index: 5; }
+    .travel-card.card-3 { animation-delay: -6s; z-index: 4; }
+    .travel-card.card-4 { animation-delay: -9s; z-index: 3; }
+    .travel-card.card-5 { animation-delay: -12s; z-index: 2; }
 
-    @keyframes queueCard {
+    @keyframes cardQueue {
       0% {
-        transform: translate(-50%, 0px) rotateX(60deg) scale(0.08);
+        transform: translate(-50%, 0px) rotateX(58deg) scale(0.10);
         opacity: 1;
       }
-      16.666% {
-        transform: translate(-50%, 120px) rotateX(54deg) scale(0.16);
+      20% {
+        transform: translate(-50%, 70px) rotateX(50deg) scale(0.22);
         opacity: 1;
       }
-      33.333% {
-        transform: translate(-50%, 240px) rotateX(46deg) scale(0.28);
+      40% {
+        transform: translate(-50%, 170px) rotateX(38deg) scale(0.38);
         opacity: 1;
       }
-      50% {
-        transform: translate(-50%, 360px) rotateX(34deg) scale(0.44);
+      60% {
+        transform: translate(-50%, 310px) rotateX(24deg) scale(0.58);
         opacity: 1;
       }
-      66.666% {
-        transform: translate(-50%, 480px) rotateX(20deg) scale(0.64);
-        opacity: 1;
-      }
-      83.333% {
-        transform: translate(-50%, 600px) rotateX(10deg) scale(0.86);
+      80% {
+        transform: translate(-50%, 470px) rotateX(10deg) scale(0.82);
         opacity: 1;
       }
       94% {
-        transform: translate(-50%, 720px) rotateX(3deg) scale(1.02);
+        transform: translate(-50%, 600px) rotateX(2deg) scale(1.02);
         opacity: 1;
       }
       98% {
-        transform: translate(-50%, 760px) rotateX(0deg) scale(1.08);
+        transform: translate(-50%, 620px) rotateX(0deg) scale(1.06);
         opacity: 0;
       }
       100% {
-        transform: translate(-50%, 0px) rotateX(60deg) scale(0.08);
+        transform: translate(-50%, 0px) rotateX(58deg) scale(0.10);
         opacity: 0;
       }
     }
 
     .travel-card-media {
       height: 150px;
-      background-color: #12091f;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-color: #171024;
     }
 
     .travel-card-body {
       padding: 18px;
       display: grid;
       gap: 8px;
-      background: rgba(18, 12, 34, 0.94);
+      background: rgba(18, 12, 34, 0.98);
     }
 
     .travel-card-body h3 {
@@ -499,7 +474,6 @@
     }
 
     h3 { letter-spacing: -0.03em; }
-
     .section-head { margin-bottom: 28px; }
 
     .project-grid {
@@ -654,15 +628,6 @@
       transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
     }
 
-    .stat-card:hover {
-      transform: translateY(-3px) scale(1.01);
-      border-color: rgba(255,79,216,0.28);
-      box-shadow:
-        0 24px 70px rgba(0,0,0,0.40),
-        0 0 18px rgba(255,79,216,0.22),
-        0 0 28px rgba(57,213,255,0.10);
-    }
-
     .stat-card strong {
       display: block;
       font-size: 22px;
@@ -701,15 +666,6 @@
       font-family: "Chakra Petch", sans-serif;
     }
 
-    .contact-links a:hover {
-      transform: translateY(-2px) scale(1.02);
-      border-color: rgba(57,213,255,0.34);
-      box-shadow:
-        0 0 14px rgba(57,213,255,0.7),
-        0 0 28px rgba(57,213,255,0.42),
-        0 0 42px rgba(255,79,216,0.16);
-    }
-
     @media (max-width: 1040px) {
       .hero-grid,
       .project-grid,
@@ -718,12 +674,11 @@
       }
 
       .hero {
-        min-height: 1600px;
+        min-height: 1350px;
       }
 
       .hero-card-track {
         width: min(760px, 94vw);
-        height: 900px;
       }
     }
 
@@ -736,8 +691,7 @@
       .nav-links { justify-content: center; }
 
       .hero {
-        padding-top: 40px;
-        min-height: 1420px;
+        min-height: 1250px;
       }
 
       .hero-actions {
@@ -747,10 +701,10 @@
 
       .hero-grid { gap: 28px; }
 
-      .hero-horizon { top: 26%; }
+      .hero-horizon { top: 250px; }
 
       .perspective-grid-wrap {
-        top: calc(26% + 1px);
+        top: 252px;
         width: 250vw;
         height: 860px;
         transform: translateX(-50%) perspective(1100px) rotateX(80deg);
@@ -758,9 +712,9 @@
       }
 
       .hero-card-track {
-        top: calc(26% + 8px);
+        top: 250px;
         width: 94vw;
-        height: 820px;
+        height: 780px;
       }
 
       .travel-card {
@@ -768,7 +722,7 @@
       }
 
       .travel-card-media {
-        height: 140px;
+        height: 130px;
       }
 
       .travel-card-body h3 {
@@ -806,7 +760,7 @@
 
         <div class="hero-card-track">
           <a class="travel-card card-1" href="#work">
-            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Journey optimisation</p>
               <h3>Energy renewal journey redesign</h3>
@@ -821,7 +775,7 @@
           </a>
 
           <a class="travel-card card-2" href="#work">
-            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Service design</p>
               <h3>Insurance journey deconstruction</h3>
@@ -835,7 +789,7 @@
           </a>
 
           <a class="travel-card card-3" href="#work">
-            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Research & experimentation</p>
               <h3>Evidence-led UX optimisation</h3>
@@ -849,7 +803,7 @@
           </a>
 
           <a class="travel-card card-4" href="#work">
-            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Operational complexity</p>
               <h3>Designing across user and agent workflows</h3>
@@ -863,7 +817,7 @@
           </a>
 
           <a class="travel-card card-5" href="#work">
-            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="travel-card-media"></div>
             <div class="travel-card-body">
               <p class="project-type">Strategy & clarity</p>
               <h3>Turning complexity into guided decision-making</h3>
@@ -871,20 +825,6 @@
               <div class="travel-card-meta">
                 <span class="travel-pill">Strategy</span>
                 <span class="travel-pill">UX</span>
-              </div>
-              <div class="travel-cta">View case study →</div>
-            </div>
-          </a>
-
-          <a class="travel-card card-6" href="#work">
-            <div class="travel-card-media" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80');"></div>
-            <div class="travel-card-body">
-              <p class="project-type">Product clarity</p>
-              <h3>Simplifying high-complexity decision flows</h3>
-              <p>Creating guided pathways that reduce ambiguity and improve confidence.</p>
-              <div class="travel-card-meta">
-                <span class="travel-pill">Product UX</span>
-                <span class="travel-pill">Clarity</span>
               </div>
               <div class="travel-cta">View case study →</div>
             </div>
