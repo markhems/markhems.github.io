@@ -4,37 +4,364 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mark Hems — Lead UX Designer</title>
-  <meta
-    name="description"
-    content="Portfolio of Mark Hems, Lead UX Designer designing clearer journeys for complex products and services."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --bg-soft: #121212;
+      --panel: rgba(255, 255, 255, 0.05);
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #f5f2ea;
+      --muted: #aaa59a;
+      --accent: #d7ff57;
+      --max-width: 1180px;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(215, 255, 87, 0.08), transparent 18%),
+        radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.04), transparent 18%),
+        linear-gradient(180deg, #090909 0%, #0c0c0c 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: bold;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 80px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow,
+    .section-label,
+    .project-type {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(56px, 10vw, 120px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-tagline {
+      margin: 18px 0 0;
+      max-width: 22ch;
+      font-size: 22px;
+      color: #d6d1c5;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      border: 1px solid var(--line);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0d;
+      border-color: transparent;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 520px;
+      border-radius: 32px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(215,255,87,0.14), transparent 24%),
+        linear-gradient(180deg, #191919 0%, #101010 100%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.25) 100%);
+    }
+
+    .hero-card-label {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(20, 20, 20, 0.82);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 84px 0;
+    }
+
+    .section-soft {
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    .section-head {
+      margin-bottom: 28px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .project-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.035));
+      box-shadow: var(--shadow);
+    }
+
+    .project-image {
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(135deg, rgba(215,255,87,0.12), transparent 45%),
+        #171717;
+    }
+
+    .project-content {
+      padding: 22px;
+    }
+
+    .project-content h3 {
+      margin: 10px 0 0;
+      font-size: 28px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .project-content p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      font-size: 14px;
+      color: #d8d2c5;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .about-copy p,
+    .contact-card p {
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .stat-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stat-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      margin-top: 8px;
+    }
+
+    .contact-card {
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.035));
+      box-shadow: var(--shadow);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      font-weight: bold;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .project-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a href="#top" class="brand">Mark Hems</a>
-
+      <div class="brand">Mark Hems</div>
       <nav class="nav-links">
         <a href="#work">Work</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
-
-      <a href="#contact" class="nav-cta">Let’s talk</a>
     </div>
   </header>
 
-  <main id="top">
+  <main>
     <section class="hero">
       <div class="container hero-grid">
-        <div class="hero-copy reveal">
+        <div>
           <p class="eyebrow">Lead UX Designer</p>
           <h1>Mark Hems</h1>
           <p class="hero-tagline">
@@ -42,99 +369,52 @@
           </p>
 
           <div class="hero-actions">
-            <a href="#work" class="btn btn-primary">View work</a>
-            <a href="#contact" class="btn btn-secondary">Contact</a>
+            <a class="btn btn-primary" href="#work">View work</a>
+            <a class="btn btn-secondary" href="#contact">Contact</a>
           </div>
         </div>
 
-        <div class="hero-visual reveal">
-          <div class="portrait-card">
-            <img src="images/mark-portrait.jpg" alt="Portrait of Mark Hems" />
-            <div class="portrait-fallback">MH</div>
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-card-label">Complex B2B journeys • Research-led UX • Service design</div>
           </div>
-
-          <div class="hero-badge badge-1">Available for senior UX roles</div>
-          <div class="hero-badge badge-2">Complex B2B journeys</div>
-          <div class="hero-badge badge-3">Research + strategy + delivery</div>
         </div>
-      </div>
-    </section>
-
-    <section class="logo-strip reveal">
-      <div class="container logo-row">
-        <span>Bionic</span>
-        <span>John Lewis</span>
-        <span>HMCTS</span>
-        <span>DWP</span>
-        <span>Hangar 13</span>
       </div>
     </section>
 
     <section id="work" class="section">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Selected work</p>
+        <div class="section-head">
+          <p class="section-label">Selected work</p>
           <h2>Featured case studies</h2>
         </div>
 
-        <article class="project-card project-large reveal">
-          <a href="#" class="project-link">
-            <div class="project-media">
-              <img src="images/project-1.jpg" alt="Energy renewal journey redesign" />
-            </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-image"></div>
             <div class="project-content">
               <p class="project-type">Journey optimisation</p>
               <h3>Energy renewal journey redesign</h3>
-              <p>
-                Reframing a high-friction renewal experience to improve clarity,
-                confidence, and commercial performance.
-              </p>
-              <div class="project-meta">
-                <span>Lead UX</span>
-                <span>Research</span>
-                <span>Service design</span>
+              <p>Reframing a high-friction renewal experience to improve clarity, confidence, and conversion.</p>
+              <div class="chip-row">
+                <span class="chip">Lead UX</span>
+                <span class="chip">Research</span>
+                <span class="chip">Service design</span>
               </div>
             </div>
-          </a>
-        </article>
-
-        <div class="project-grid">
-          <article class="project-card reveal">
-            <a href="#" class="project-link">
-              <div class="project-media">
-                <img src="images/project-2.jpg" alt="Insurance journey deconstruction" />
-              </div>
-              <div class="project-content">
-                <p class="project-type">Service design</p>
-                <h3>Insurance journey deconstruction</h3>
-                <p>
-                  Simplifying a logic-heavy journey through clearer IA and conditional flows.
-                </p>
-                <div class="project-meta">
-                  <span>IA</span>
-                  <span>Mapping</span>
-                </div>
-              </div>
-            </a>
           </article>
 
-          <article class="project-card reveal">
-            <a href="#" class="project-link">
-              <div class="project-media">
-                <img src="images/project-3.jpg" alt="Evidence-led UX optimisation" />
+          <article class="project-card">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <p class="project-type">Service design</p>
+              <h3>Insurance journey deconstruction</h3>
+              <p>Simplifying a logic-heavy insurance flow through clearer IA, page structure, and conditional logic.</p>
+              <div class="chip-row">
+                <span class="chip">IA</span>
+                <span class="chip">Mapping</span>
               </div>
-              <div class="project-content">
-                <p class="project-type">Research & experimentation</p>
-                <h3>Evidence-led UX optimisation</h3>
-                <p>
-                  Using testing and behavioural evidence to guide higher-value design decisions.
-                </p>
-                <div class="project-meta">
-                  <span>Testing</span>
-                  <span>Experiments</span>
-                </div>
-              </div>
-            </a>
+            </div>
           </article>
         </div>
       </div>
@@ -142,30 +422,30 @@
 
     <section id="about" class="section section-soft">
       <div class="container about-grid">
-        <div class="about-copy reveal">
-          <p class="eyebrow">About</p>
+        <div class="about-copy">
+          <p class="section-label">About</p>
           <h2>I design for clarity, confidence, and momentum.</h2>
           <p>
-            I’m a Lead UX Designer focused on complex digital services, journey
-            optimisation, research-led design, and commercially important user problems.
+            I’m a Lead UX Designer focused on complex digital services, journey optimisation,
+            research-led design, service design, and information architecture.
           </p>
           <p>
-            My work sits across UX design, service design, usability testing,
-            experimentation, and information architecture.
+            My strongest work tends to sit where user needs, operational complexity,
+            and business goals collide.
           </p>
         </div>
 
-        <div class="about-panel reveal">
+        <div class="stat-stack">
           <div class="stat-card">
-            <span class="stat-label">Focus</span>
+            <p class="section-label">Focus</p>
             <strong>Complex journeys</strong>
           </div>
           <div class="stat-card">
-            <span class="stat-label">Approach</span>
+            <p class="section-label">Approach</p>
             <strong>Evidence-led design</strong>
           </div>
           <div class="stat-card">
-            <span class="stat-label">Strength</span>
+            <p class="section-label">Strength</p>
             <strong>Reducing ambiguity</strong>
           </div>
         </div>
@@ -173,22 +453,18 @@
     </section>
 
     <section id="contact" class="section">
-      <div class="container contact-card reveal">
-        <p class="eyebrow">Contact</p>
+      <div class="container contact-card">
+        <p class="section-label">Contact</p>
         <h2>Let’s talk.</h2>
-        <p>
-          For senior UX roles, freelance opportunities, or design conversations.
-        </p>
+        <p>For senior UX roles, freelance opportunities, or design conversations.</p>
 
         <div class="contact-links">
           <a href="mailto:your@email.com">your@email.com</a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://github.com/markhems" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </section>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
